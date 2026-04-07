@@ -51,4 +51,19 @@ recognition.start()
 
 }
 
+savePhrase(){
+
+let phrase =
+document.getElementById("phrase-input").value
+
+let phrases =
+JSON.parse(localStorage.getItem("phrases") || "[]")
+
+phrases.push(phrase)
+
+localStorage.setItem("phrases",
+JSON.stringify(phrases))
+
+}
+
 }

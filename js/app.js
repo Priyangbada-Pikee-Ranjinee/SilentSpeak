@@ -66,4 +66,12 @@ JSON.stringify(phrases))
 
 }
 
+setTheme(theme){
+
+document.body.className = theme
+
+localStorage.setItem("theme", theme)
+
+}
+
 }

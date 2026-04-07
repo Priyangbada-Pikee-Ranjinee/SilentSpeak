@@ -18,4 +18,18 @@ this.showScreen("screen-dashboard")
 
 }
 
+speak(){
+
+let text =
+document.getElementById("tts-input").value
+
+let speech =
+new SpeechSynthesisUtterance(text)
+
+speech.rate = 1
+
+speechSynthesis.speak(speech)
+
+}
+
 }

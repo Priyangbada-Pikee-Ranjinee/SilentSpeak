@@ -32,4 +32,23 @@ speechSynthesis.speak(speech)
 
 }
 
+startListening(){
+
+const recognition =
+new webkitSpeechRecognition()
+
+recognition.onresult = function(event){
+
+let transcript =
+event.results[0][0].transcript
+
+document.getElementById("transcript-display").innerText
+= transcript
+
+}
+
+recognition.start()
+
+}
+
 }

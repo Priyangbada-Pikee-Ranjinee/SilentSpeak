@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silent Speak</title>
+  <link rel="stylesheet" href="./TTS_style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Header -->
+    <div class="header">
+      <button class="menu-btn">Menu</button>
+      <h1>Silent Speak</h1>
+      <button class="info-btn">Info</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+
+      <h2>Text to Speech</h2>
+
+      <!-- Text Input -->
+      <textarea id="ttsInput" placeholder="Type your text here..."></textarea>
+
+      <!-- Voice Preview -->
+      <button id="previewBtn">Voice Preview</button>
+
+      <!-- Play / Stop Controls -->
+      <div class="controls">
+        <button id="playBtn">Play</button>
+        <button id="stopBtn">Stop</button>
+      </div>
+
+      <!-- Speed Controls -->
+      <div class="speed">
+        <button class="speed-btn" data-rate="0.6">Slow &lt;&lt;</button>
+        <button class="speed-btn active" data-rate="1">Normal</button>
+        <button class="speed-btn" data-rate="1.7">Fast &gt;&gt;</button>
+      </div>
+
+      <!-- Quick Phrases -->
+      <div class="quick">
+        <button class="quick-btn">Hi</button>
+        <button class="quick-btn">I'm Fine</button>
+        <button class="quick-btn">Help</button>
+      </div>
+
+    </div>
+
+    <!-- Footer Label -->
+    <div class="footer">
+      <p>Text to Speech</p>
+    </div>
+
+  </div>
+
+  
+
+</body>
+</html>

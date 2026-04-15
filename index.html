@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Speak - Communication Aid for Students with Disabilities</title>
+    <!-- Tailwind CSS + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="font-sans overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="navbar bg-primary text-primary-content fixed top-0 z-50 shadow-lg">
+        <div class="w-full flex items-center justify-between px-4">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="#">
+                    <i class="fas fa-comments mr-2"></i> Silent Speak
+                </a>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end lg:hidden relative z-50">
+                    <label tabindex="0" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                    </label>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-[9999] absolute">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="pages/login.html" class="btn btn-sm btn-light mt-2">Login</a></li>
+                        <li><a href="pages/register.html" class="btn btn-sm btn-outline btn-light mt-2">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="#home" class="text-white hover:bg-primary-focus">Home</a></li>
+                        <li><a href="#features" class="text-white hover:bg-primary-focus">Features</a></li>
+                        <li><a href="#about" class="text-white hover:bg-primary-focus">About</a></li>
+                        <li><a href="#contact" class="text-white hover:bg-primary-focus">Contact</a></li>
+                        <li><a href="pages/login.html" class="btn btn-light ml-2">Login</a></li>
+                        <li><a href="pages/register.html" class="btn btn-outline btn-light ml-2">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section pt-20 pb-10 mt-16">
+        <div class="w-full px-4 mt-20">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-800">Breaking Communication Barriers for Students with Disabilities</h1>
+                    <p class="text-lg md:text-xl mb-8 text-gray-600 leading-relaxed">Silent Speak is an innovative web application designed to help students with hearing, speech, color blindness, and dyslexia communicate effectively in classroom settings.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="pages/register.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus mr-2"></i> Create Account
+                        </a>
+                        <a href="app.html" class="btn btn-outline btn-primary btn-lg">
+                            <i class="fas fa-rocket mr-2"></i> Launch App
+                        </a>
+                        <a href="#features" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-info-circle mr-2"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                         alt="Students communicating in classroom" class="rounded-2xl shadow-2xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-base-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                    <div class="card-body text-center p-8">
+                        <div class="feature-icon">
+                            <i class="fas fa-microphone-alt fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4">Live Captioning</h3>
+                        <p class="text-gray-600">Real-time speech-to-text conversion for classroom lectures in multiple languages including Bangla, English, and Banglish.</p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                    <div class="card-body text-center p-8">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4">Teacher-Student Sessions</h3>
+                        <p class="text-gray-600">Create virtual classrooms where teachers can share live captions and students can join with session codes.</p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                    <div class="card-body text-center p-8">
+                        <div class="feature-icon">
+                            <i class="fas fa-sticky-note fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4">Smart Notes</h3>
+                        <p class="text-gray-600">Save captions as notes with AI-powered formatting and organization for better study materials.</p>
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                    <div class="card-body text-center p-8">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4">Pomodoro Timer</h3>
+                        <p class="text-gray-600">Focus timer with task management integrated with teacher-assigned homework and classwork.</p>
+                    </div>
+                </div>
+                <!-- Feature 5 -->
+                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                    <div class="card-body text-center p-8">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4">Quick Communication</h3>
+                        <p class="text-gray-600">Pre-set buttons for common phrases and emergency communication with text-to-speech output.</p>
+                    </div>
+                </div>
+                <!-- Feature 6 -->
+                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                    <div class="card-body text-center p-8">
+                        <div class="feature-icon">
+                            <i class="fas fa-universal-access fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4">Accessibility First</h3>
+                        <p class="text-gray-600">Color-blind friendly themes, adjustable font sizes, and customizable interface for diverse needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">About Silent Speak</h2>
+                <p class="text-xl mb-6 text-gray-700 leading-relaxed">Silent Speak is an academic Design Project-2 initiative aimed at creating an inclusive communication platform for students with hearing, speech, color blindness, and dyslexia disabilities.</p>
+                <p class="text-lg mb-6 text-gray-600">Our mission is to bridge the communication gap between teachers and students in classroom environments, ensuring every student has equal access to education regardless of their disabilities.</p>
+                <p class="text-lg text-gray-600">The platform uses cutting-edge web technologies including real-time speech recognition, AI-powered note formatting, and responsive design to work seamlessly on mobile devices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-primary text-primary-content">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Classroom Communication?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of students and teachers using Silent Speak to make education more accessible.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="pages/register.html" class="btn btn-light btn-lg">
+                    <i class="fas fa-user-plus mr-2"></i> Sign Up Free
+                </a>
+                <a href="app.html" class="btn btn-outline btn-light btn-lg">
+                    <i class="fas fa-rocket mr-2"></i> Try Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-neutral-content py-12">
+        <div class="w-full px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h5 class="text-xl font-bold mb-4"><i class="fas fa-comments mr-2"></i> Silent Speak</h5>
+                    <p class="mb-4">Communication aid for students with disabilities.</p>
+                    <div class="social-icons flex gap-4">
+                        <a href="#" class="hover:text-primary"><i class="fab fa-facebook text-2xl"></i></a>
+                        <a href="#" class="hover:text-primary"><i class="fab fa-twitter text-2xl"></i></a>
+                        <a href="#" class="hover:text-primary"><i class="fab fa-instagram text-2xl"></i></a>
+                        <a href="#" class="hover:text-primary"><i class="fab fa-github text-2xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-xl font-bold mb-4">Quick Links</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="link link-hover">Home</a></li>
+                        <li><a href="#features" class="link link-hover">Features</a></li>
+                        <li><a href="#about" class="link link-hover">About</a></li>
+                        <li><a href="#contact" class="link link-hover">Contact</a></li>
+                        <li><a href="app.html" class="link link-hover">Launch App</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xl font-bold mb-4">Contact</h5>
+                    <p class="mb-2"><i class="fas fa-envelope mr-2"></i> support@silentspeak.edu</p>
+                    <p class="mb-2"><i class="fas fa-phone mr-2"></i> +880 1234 567890</p>
+                    <p><i class="fas fa-map-marker-alt mr-2"></i> Dhaka, Bangladesh</p>
+                </div>
+            </div>
+            <div class="divider my-8"></div>
+            <div class="text-center">
+                <p>&copy; 2023 Silent Speak. All rights reserved. | Academic Design Project-2</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <!-- DaisyUI JS for interactive components -->
+    <script>
+        // Initialize any DaisyUI components if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

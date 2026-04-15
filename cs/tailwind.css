@@ -1,0 +1,66 @@
+/* Silent Speak - Tailwind Custom Styles */
+
+
+
+/* Custom utility classes for Silent Speak */
+.feature-icon {
+    @apply w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5;
+}
+
+.feature-icon-large {
+    @apply w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5;
+}
+
+.hero-section {
+    @apply bg-gradient-to-br from-gray-50 to-blue-50 rounded-b-3xl -mt-5;
+}
+
+.card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+/* Accessibility color classes */
+.colorblind-blue { color: #0072B2; }
+.colorblind-orange { color: #E69F00; }
+.colorblind-green { color: #009E73; }
+.colorblind-red { color: #D55E00; }
+.colorblind-yellow { color: #F0E442; }
+.colorblind-purple { color: #CC79A7; }
+
+/* Custom spacing for fixed navbar */
+body {
+    padding-top: 4rem; /* 64px - for fixed navbar */
+}
+
+/* Custom button styles */
+.btn-accessibility {
+    @apply btn btn-outline border-2 font-semibold;
+}
+
+/* Text size adjustments for accessibility */
+.text-accessibility-lg {
+    @apply text-lg leading-relaxed;
+}
+
+.text-accessibility-xl {
+    @apply text-xl leading-relaxed;
+}
+
+/* Focus styles for better accessibility */
+*:focus {
+    @apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .btn {
+        @apply border-2;
+    }
+    
+    .card {
+        @apply border-2;
+    }
+}
+
+
+@import "tailwindcss"

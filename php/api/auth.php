@@ -409,4 +409,130 @@ function resetPassword() {
     sendSuccess([], 'Password reset successful');
 }
 
+
+/**
+ * Verify JWT token
+ */
+function verifyToken() {
+    $token = getBearerToken();
+    
+    if (!$token) {
+        sendError('Token required', 401);
+    }
+    
+    $payload = verifyJWT($token);
+    
+    if (!$payload) {
+        sendError('Invalid or expired token', 401);
+    }
+    
+    sendSuccess([
+        'valid' => true,
+        'user' => [
+            'userId' => $payload['userId'],
+            'email' => $payload['email'],
+            'role' => $payload['role']
+        ]
+    ], 'Token is valid');
+}
+
+/**
+ * Get user profile
+ */
+function getProfile() {
+    $payload = requireAuth();
+    $userId = $payload['userId'];
+    
+    $conn = getDatabaseConnection();
+    
+    if ($conn) {
+        $stmt = $conn->prepare("
+            SELECT id, email, first_name, last_name, phone, date_of_birth,
+                   gender, role, institution, department, semester, bio,
+                   disabilities, settings, profile_image, is_verified,
+                   created_at, updated_at
+            FROM users 
+            WHERE id = ?
+        ");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            sendError('User not found', 404);
+        }
+        
+        $user = $result->fetch_assoc();
+        
+        // Convert JSON fields
+        $user['disabilities'] = json_decode($user['disabilities'], true);
+        $user['settings'] = json_decode($user['settings'], true);
+        
+        // Remove sensitive data
+        unset($user['password_hash']);
+        
+        sendSuccess([
+            'profile' => $user
+        ], 'Profile retrieved successfully');
+        
+        $stmt->close();
+    } else {
+        // Demo mode - return demo profile
+        sendSuccess([
+            'profile' => [
+                'id' => $userId,
+                'email' => 'demo@example.com',
+                'first_name' => 'Demo',
+                'last_name' => 'User',
+                'phone' => '+880 1234 567890',
+                'date_of_birth' => '2000-01-01',
+                'gender' => 'male',
+                'role' => 'student',
+                'institution' => 'University of Dhaka',
+                'department' => 'Computer Science',
+                'semester' => '5',
+                'bio' => 'Demo user for Silent Speak application',
+                'disabilities' => [
+                    'primary' => 'Hearing Impairment',
+                    'additional' => ['Color Blindness'],
+                    'assistiveTech' => ['Screen Reader']
+                ],
+                'settings' => [
+                    'accessibility' => [
+                        'fontSize' => 'medium',
+                        'colorTheme' => 'default',
+                        'highContrast' => false
+                    ]
+                ],
+                'profile_image' => null,
+                'is_verified' => true,
+                'created_at' => '2023-01-01 00:00:00',
+                'updated_at' => '2023-10-01 00:00:00'
+            ]
+        ], 'Profile retrieved (demo mode)');
+    }
+}
+
+/**
+ * Log activity
+ */
+function logActivity($userId, $activityType, $details) {
+    $conn = getDatabaseConnection();
+    
+    if (!$conn) {
+        return;
+    }
+    
+    $deviceInfo = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'Unknown';
+    $ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
+    
+    $stmt = $conn->prepare("
+        INSERT INTO activity_logs (user_id, activity_type, details, device_info, ip_address)
+        VALUES (?, ?, ?, ?, ?)
+    ");
+    
+    $stmt->bind_param("issss", $userId, $activityType, $details, $deviceInfo, $ipAddress);
+    $stmt->execute();
+    $stmt->close();
+}
 ?>

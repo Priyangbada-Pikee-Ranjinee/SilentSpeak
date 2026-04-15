@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Session - Silent Speak</title>
+    <!-- Tailwind + DaisyUI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="navbar bg-primary text-primary-content shadow-lg">
+        <div class="container mx-auto">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="../app.html">
+                    <i class="fas fa-comments"></i> Silent Speak
+                </a>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end lg:hidden">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-base-content">
+                        <li><a href="../app.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a class="active" href="live-session.html"><i class="fas fa-broadcast-tower"></i> Live Session</a></li>
+                        <li><a href="text-to-speech.html"><i class="fas fa-text-height"></i> Text to Speech</a></li>
+                        <li><a href="speech-to-text.html"><i class="fas fa-microphone"></i> Speech to Text</a></li>
+                        <li class="divider"></li>
+                        <li><a href="profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a class="text-error" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+                <div class="hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="../app.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a class="active" href="live-session.html"><i class="fas fa-broadcast-tower"></i> Live Session</a></li>
+                        <li><a href="text-to-speech.html"><i class="fas fa-text-height"></i> Text to Speech</a></li>
+                        <li><a href="speech-to-text.html"><i class="fas fa-microphone"></i> Speech to Speech</a></li>
+                        <li>
+                            <details>
+                                <summary><i class="fas fa-user-circle"></i> Profile</summary>
+                                <ul class="bg-base-100 p-2 shadow-lg rounded-box w-52">
+                                    <li><a href="profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a class="text-error" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Role Selection -->
+    <div class="container mx-auto px-4 mt-6" id="roleSelection">
+        <div class="max-w-4xl mx-auto">
+            <div class="card shadow-2xl border-0">
+                <div class="card-body p-8 text-center">
+                    <h1 class="text-4xl font-bold mb-4">Live Classroom Session</h1>
+                    <p class="text-lg mb-8">Choose your role to join or create a live session with real-time captioning and communication.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="card border-0 shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer role-card" data-role="teacher">
+                            <div class="card-body p-6 text-center">
+                                <div class="role-icon mb-4">
+                                    <i class="fas fa-chalkboard-teacher text-6xl text-success"></i>
+                                </div>
+                                <h3 class="card-title text-2xl font-bold mb-3">Teacher</h3>
+                                <p class="mb-4">Create a classroom session, share live captions, manage students, and send assignments.</p>
+                                <ul class="text-left mb-4 space-y-2">
+                                    <li><i class="fas fa-check text-success mr-2"></i> Generate session codes</li>
+                                    <li><i class="fas fa-check text-success mr-2"></i> Real-time speech-to-text</li>
+                                    <li><i class="fas fa-check text-success mr-2"></i> Student management</li>
+                                    <li><i class="fas fa-check text-success mr-2"></i> Assignment distribution</li>
+                                </ul>
+                                <button class="btn btn-success btn-lg w-full" onclick="selectRole('teacher')">
+                                    <i class="fas fa-plus-circle"></i> Create Session
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="card border-0 shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer role-card" data-role="student">
+                            <div class="card-body p-6 text-center">
+                                <div class="role-icon mb-4">
+                                    <i class="fas fa-user-graduate text-6xl text-primary"></i>
+                                </div>
+                                <h3 class="card-title text-2xl font-bold mb-3">Student</h3>
+                                <p class="mb-4">Join a classroom session, view live captions, communicate with teacher, and save notes.</p>
+                                <ul class="text-left mb-4 space-y-2">
+                                    <li><i class="fas fa-check text-primary mr-2"></i> Join with session code</li>
+                                    <li><i class="fas fa-check text-primary mr-2"></i> View live captions</li>
+                                    <li><i class="fas fa-check text-primary mr-2"></i> Quick communication</li>
+                                    <li><i class="fas fa-check text-primary mr-2"></i> Save notes & transcripts</li>
+                                </ul>
+                                <button class="btn btn-primary btn-lg w-full" onclick="selectRole('student')">
+                                    <i class="fas fa-sign-in-alt"></i> Join Session
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-2xl font-bold mb-6">How it works</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="card bg-base-100 shadow-sm">
+                                <div class="card-body text-center">
+                                    <div class="step-number w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">1</div>
+                                    <p class="font-medium">Teacher creates a session</p>
+                                </div>
+                            </div>
+                            <div class="card bg-base-100 shadow-sm">
+                                <div class="card-body text-center">
+                                    <div class="step-number w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">2</div>
+                                    <p class="font-medium">Students join with code</p>
+                                </div>
+                            </div>
+                            <div class="card bg-base-100 shadow-sm">
+                                <div class="card-body text-center">
+                                    <div class="step-number w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">3</div>
+                                    <p class="font-medium">Real-time captioning</p>
+                                </div>
+                            </div>
+                            <div class="card bg-base-100 shadow-sm">
+                                <div class="card-body text-center">
+                                    <div class="step-number w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 text-xl font-bold">4</div>
+                                    <p class="font-medium">Interactive communication</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Panel (Hidden by default) -->
+    <div class="container mx-auto px-4 mt-6 hidden" id="teacherPanel">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <div class="lg:w-2/3">
+                <div class="card shadow-2xl border-0">
+                    <div class="card-header bg-success text-success-content">
+                        <h3 class="text-xl font-bold"><i class="fas fa-chalkboard-teacher"></i> Teacher Control Panel</h3>
+                    </div>
+                    <div class="card-body p-6">
+                        <!-- Session Info -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="card bg-base-100 shadow">
+                                <div class="card-body">
+                                    <h4 class="card-title text-lg font-bold mb-4">Session Information</h4>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Session Code</span>
+                                        </label>
+                                        <div class="flex gap-2">
+                                            <input type="text" class="input input-bordered flex-1" id="sessionCode" value="ABC123" readonly>
+                                            <button class="btn btn-outline-success" onclick="copySessionCode()">
+                                                <i class="fas fa-copy"></i> Copy
+                                            </button>
+                                        </div>
+                                        <div class="label">
+                                            <span class="label-text-alt">Share this code with students to join</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Session Name</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered" id="sessionName" value="Math 101 - Algebra">
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Subject</span>
+                                        </label>
+                                        <select class="select select-bordered" id="subject">
+                                            <option>Mathematics</option>
+                                            <option>Science</option>
+                                            <option>English</option>
+                                            <option>Bangla</option>
+                                            <option>Physics</option>
+                                            <option>Chemistry</option>
+                                            <option>Biology</option>
+                                            <option>Computer Science</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card bg-base-100 shadow">
+                                <div class="card-body">
+                                    <h4 class="card-title text-lg font-bold mb-4">Session Controls</h4>
+                                    <div class="space-y-3 mb-4">
+                                        <button class="btn btn-success w-full" id="startSessionBtn">
+                                            <i class="fas fa-play"></i> Start Session
+                                        </button>
+                                        <button class="btn btn-warning w-full" id="pauseSessionBtn" disabled>
+                                            <i class="fas fa-pause"></i> Pause Session
+                                        </button>
+                                        <button class="btn btn-error w-full" id="endSessionBtn">
+                                            <i class="fas fa-stop"></i> End Session
+                                        </button>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Connected Students</span>
+                                        </label>
+                                        <div class="connected-students flex flex-wrap gap-2">
+                                            <span class="badge badge-primary">Ahmed (Student 1)</span>
+                                            <span class="badge badge-primary">Fatima (Student 2)</span>
+                                            <span class="badge badge-primary">Rahim (Student 3)</span>
+                                            <span class="badge badge-primary">Sara (Student 4)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Live Captioning -->
+                        <div class="card shadow mb-6">
+                            <div class="card-header bg-info text-info-content">
+                                <h4 class="text-lg font-bold"><i class="fas fa-captions"></i> Live Captioning</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                    <div class="lg:col-span-2">
+                                        <div class="caption-box bg-base-200 p-4 rounded-lg h-64 overflow-y-auto" id="teacherCaptionBox">
+                                            <div class="caption-line border-b border-base-300 py-2">[10:30] Welcome to today's Math class on Algebra</div>
+                                            <div class="caption-line border-b border-base-300 py-2">[10:31] Today we'll be learning about quadratic equations</div>
+                                            <div class="caption-line border-b border-base-300 py-2">[10:32] The general form is ax² + bx + c = 0</div>
+                                            <div class="caption-line border-b border-base-300 py-2">[10:33] Can anyone tell me what 'a' represents?</div>
+                                        </div>
+                                        <div class="mt-4 flex flex-wrap items-center justify-between">
+                                            <div class="flex items-center gap-4">
+                                                <label class="label cursor-pointer gap-2">
+                                                    <input type="checkbox" class="checkbox checkbox-sm" id="autoScroll" checked>
+                                                    <span class="label-text">Auto Scroll</span>
+                                                </label>
+                                                <label class="label cursor-pointer gap-2">
+                                                    <input type="checkbox" class="checkbox checkbox-sm" id="showTimestamps" checked>
+                                                    <span class="label-text">Show Timestamps</span>
+                                                </label>
+                                            </div>
+                                            <button class="btn btn-outline btn-sm" onclick="clearCaptions()">
+                                                <i class="fas fa-trash"></i> Clear
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow">
+                                        <div class="card-body">
+                                            <h5 class="font-bold mb-4">Speech Controls</h5>
+                                            <div class="space-y-3 mb-4">
+                                                <button class="btn btn-primary w-full" id="startMicBtn">
+                                                    <i class="fas fa-microphone"></i> Start Microphone
+                                                </button>
+                                                <button class="btn btn-outline w-full" id="stopMicBtn" disabled>
+                                                    <i class="fas fa-microphone-slash"></i> Stop Microphone
+                                                </button>
+                                            </div>
+                                            <div class="form-control mb-4">
+                                                <label class="label">
+                                                    <span class="label-text font-semibold">Language</span>
+                                                </label>
+                                                <select class="select select-bordered" id="captionLanguage">
+                                                    <option value="en-US">English (US)</option>
+                                                    <option value="en-GB">English (UK)</option>
+                                                    <option value="bn-BD">Bangla (Bangladesh)</option>
+                                                    <option value="bn-IN">Bangla (India)</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-control mb-4">
+                                                <label class="label cursor-pointer justify-start gap-3">
+                                                    <input type="checkbox" class="toggle toggle-primary" id="showTranslation">
+                                                    <span class="label-text font-semibold">Show Bangla translation</span>
+                                                </label>
+                                                <p class="text-xs text-base-content/70 mt-1">When enabled, captions will show both English and Bangla translation</p>
+                                            </div>
+                                            <div class="form-control">
+                                                <label class="label">
+                                                    <span class="label-text font-semibold">Speech Speed</span>
+                                                </label>
+                                                <select class="select select-bordered" id="speechSpeed">
+                                                    <option value="slow">Slow</option>
+                                                    <option value="normal" selected>Normal</option>
+                                                    <option value="fast">Fast</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Communication & Tasks -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="card shadow">
+                                <div class="card-header bg-warning text-warning-content">
+                                    <h4 class="text-lg font-bold"><i class="fas fa-comments"></i> Communication</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Send Message</span>
+                                        </label>
+                                        <div class="flex gap-2">
+                                            <input type="text" class="input input-bordered flex-1" id="teacherMessage" placeholder="Type your message...">
+                                            <select class="select select-bordered w-32" id="messageRecipient">
+                                                <option value="all">All Students</option>
+                                                <option value="ahmed">Ahmed</option>
+                                                <option value="fatima">Fatima</option>
+                                                <option value="rahim">Rahim</option>
+                                                <option value="sara">Sara</option>
+                                            </select>
+                                            <button class="btn btn-primary" id="sendMessageBtn">
+                                                <i class="fas fa-paper-plane"></i> Send
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <div class="chat-box bg-base-200 p-4 rounded-lg h-40 overflow-y-auto" id="teacherChatBox">
+                                            <div class="message teacher mb-2">
+                                                <div class="font-medium">Teacher:</div>
+                                                <div class="text-sm">Welcome to today's class!</div>
+                                            </div>
+                                            <div class="message student mb-2">
+                                                <div class="font-medium">Ahmed:</div>
+                                                <div class="text-sm">Good morning, teacher!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card shadow">
+                                <div class="card-header bg-info text-info-content">
+                                    <h4 class="text-lg font-bold"><i class="fas fa-tasks"></i> Tasks & Assignments</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Create Assignment</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered mb-2" id="assignmentTitle" placeholder="Assignment title">
+                                        <textarea class="textarea textarea-bordered mb-2" id="assignmentDescription" placeholder="Description..."></textarea>
+                                        <button class="btn btn-success w-full" id="addAssignmentBtn">
+                                            <i class="fas fa-plus"></i> Add Assignment
+                                        </button>
+                                    </div>
+                                    <div class="space-y-3" id="assignmentList">
+                                        <!-- Dynamic assignments will be inserted here -->
+                                        <div class="text-center py-4 text-base-content/50" id="noAssignmentsMessage">
+                                            No assignments yet. Create your first assignment above.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Student Panel (Hidden by default) -->
+            <div class="lg:w-1/3">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-primary-content">
+                        <h3 class="text-lg font-bold"><i class="fas fa-user-graduate"></i> Student Panel</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-4">This panel would show student-specific controls when in student mode.</p>
+                        <button class="btn btn-outline w-full" onclick="switchToStudentView()">
+                            <i class="fas fa-exchange-alt"></i> Switch to Student View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Panel -->
+    <div class="container mx-auto px-4 mt-6 hidden" id="studentPanel">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <div class="lg:w-2/3">
+                <div class="card shadow-2xl border-0">
+                    <div class="card-header bg-primary text-primary-content">
+                        <h3 class="text-xl font-bold"><i class="fas fa-user-graduate"></i> Student Panel</h3>
+                    </div>
+                    <div class="card-body p-6">
+                        <!-- Join Session Section -->
+                        <div id="joinSessionSection">
+                            <div class="card bg-base-100 shadow mb-6">
+                                <div class="card-body">
+                                    <h4 class="card-title text-lg font-bold mb-4">Join Live Session</h4>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Session Code</span>
+                                        </label>
+                                        <div class="flex gap-2">
+                                            <input type="text" class="input input-bordered flex-1" id="studentSessionCode" placeholder="Enter session code (e.g., ABC123)">
+                                            <button class="btn btn-primary" id="joinSessionBtn">
+                                                <i class="fas fa-sign-in-alt"></i> Join
+                                            </button>
+                                        </div>
+                                        <div class="label">
+                                            <span class="label-text-alt">Get the session code from your teacher</span>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle"></i>
+                                        <div>
+                                            <h4 class="font-bold">How to join</h4>
+                                            <p class="text-sm">1. Ask your teacher for the session code</p>
+                                            <p class="text-sm">2. Enter the code above and click Join</p>
+                                            <p class="text-sm">3. Once joined, you'll see live captions and assignments</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Session Section (Hidden by default) -->
+                        <div id="activeSessionSection" class="hidden">
+                            <!-- Session Info -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div class="card bg-base-100 shadow">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-lg font-bold mb-4">Session Information</h4>
+                                        <div class="form-control mb-4">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Session Name</span>
+                                            </label>
+                                            <input type="text" class="input input-bordered" id="studentSessionName" value="Math 101 - Algebra" readonly>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Teacher</span>
+                                            </label>
+                                            <input type="text" class="input input-bordered" id="studentTeacherName" value="Mr. Smith" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card bg-base-100 shadow">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-lg font-bold mb-4">Student Controls</h4>
+                                        <div class="space-y-3 mb-4">
+                                            <button class="btn btn-success w-full" id="saveNotesBtn">
+                                                <i class="fas fa-save"></i> Save Notes
+                                            </button>
+                                            <button class="btn btn-info w-full" id="downloadCaptionsBtn">
+                                                <i class="fas fa-download"></i> Download Captions
+                                            </button>
+                                            <button class="btn btn-error w-full" id="leaveSessionBtn">
+                                                <i class="fas fa-sign-out-alt"></i> Leave Session
+                                            </button>
+                                        </div>
+                                        <div class="form-control">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Your Status</span>
+                                            </label>
+                                            <div class="flex items-center gap-2">
+                                                <div class="badge badge-success">Connected</div>
+                                                <span class="text-sm">You are connected to the live session</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Live Captioning -->
+                            <div class="card shadow mb-6">
+                                <div class="card-header bg-info text-info-content">
+                                    <h4 class="text-lg font-bold"><i class="fas fa-captions"></i> Live Captions</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                        <div class="lg:col-span-2">
+                                            <div class="caption-box bg-base-200 p-4 rounded-lg h-64 overflow-y-auto" id="studentCaptionBox">
+                                                <div class="text-center py-8 text-base-content/50">Live captions will appear here once the teacher starts speaking</div>
+                                            </div>
+                                            <div class="mt-4 flex flex-wrap items-center justify-between">
+                                                <div class="flex items-center gap-4">
+                                                    <label class="label cursor-pointer gap-2">
+                                                        <input type="checkbox" class="checkbox checkbox-sm" id="studentAutoScroll" checked>
+                                                        <span class="label-text">Auto Scroll</span>
+                                                    </label>
+                                                    <label class="label cursor-pointer gap-2">
+                                                        <input type="checkbox" class="checkbox checkbox-sm" id="studentShowTranslation">
+                                                        <span class="label-text">Show Bangla Translation</span>
+                                                    </label>
+                                                </div>
+                                                <button class="btn btn-outline btn-sm" id="clearStudentCaptionsBtn">
+                                                    <i class="fas fa-trash"></i> Clear
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card bg-base-100 shadow">
+                                            <div class="card-body">
+                                                <h5 class="font-bold mb-4">Caption Settings</h5>
+                                                <div class="form-control mb-4">
+                                                    <label class="label">
+                                                        <span class="label-text font-semibold">Text Size</span>
+                                                    </label>
+                                                    <select class="select select-bordered" id="captionTextSize">
+                                                        <option value="small">Small</option>
+                                                        <option value="medium" selected>Medium</option>
+                                                        <option value="large">Large</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-control mb-4">
+                                                    <label class="label">
+                                                        <span class="label-text font-semibold">Color Theme</span>
+                                                    </label>
+                                                    <select class="select select-bordered" id="captionColorTheme">
+                                                        <option value="light">Light</option>
+                                                        <option value="dark" selected>Dark</option>
+                                                        <option value="high-contrast">High Contrast</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-control">
+                                                    <label class="label">
+                                                        <span class="label-text font-semibold">Display Speed</span>
+                                                    </label>
+                                                    <select class="select select-bordered" id="captionDisplaySpeed">
+                                                        <option value="slow">Slow</option>
+                                                        <option value="normal" selected>Normal</option>
+                                                        <option value="fast">Fast</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Assignments & Communication -->
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                <div class="card shadow">
+                                    <div class="card-header bg-warning text-warning-content">
+                                        <h4 class="text-lg font-bold"><i class="fas fa-tasks"></i> Assignments</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="space-y-3" id="studentAssignmentList">
+                                            <div class="text-center py-4 text-base-content/50" id="noStudentAssignmentsMessage">
+                                                No assignments yet. Check back later.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card shadow">
+                                    <div class="card-header bg-success text-success-content">
+                                        <h4 class="text-lg font-bold"><i class="fas fa-comments"></i> Communication</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-control mb-4">
+                                            <label class="label">
+                                                <span class="label-text font-semibold">Send Message to Teacher</span>
+                                            </label>
+                                            <div class="flex gap-2">
+                                                <input type="text" class="input input-bordered flex-1" id="studentMessage" placeholder="Type your question...">
+                                                <button class="btn btn-primary" id="sendStudentMessageBtn">
+                                                    <i class="fas fa-paper-plane"></i> Send
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4">
+                                            <div class="chat-box bg-base-200 p-4 rounded-lg h-40 overflow-y-auto" id="studentChatBox">
+                                                <div class="message teacher mb-2">
+                                                    <div class="font-medium">Teacher:</div>
+                                                    <div class="text-sm">Welcome to today's class!</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Notes Section -->
+                            <div class="card shadow mt-6">
+                                <div class="card-header bg-accent text-accent-content">
+                                    <h4 class="text-lg font-bold"><i class="fas fa-edit"></i> Personal Notes</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-control">
+                                        <textarea class="textarea textarea-bordered h-32" id="studentNotes" placeholder="Take notes during the class..."></textarea>
+                                    </div>
+                                    <div class="mt-4 flex justify-between">
+                                        <div class="text-sm text-base-content/70">
+                                            <i class="fas fa-lightbulb"></i> Your notes are saved automatically
+                                        </div>
+                                        <button class="btn btn-outline btn-sm" id="enhanceNotesBtn">
+                                            <i class="fas fa-magic"></i> Enhance Notes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions Panel -->
+            <div class="lg:w-1/3">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-secondary text-secondary-content">
+                        <h3 class="text-lg font-bold"><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="space-y-3">
+                            <button class="btn btn-outline w-full" id="askQuestionBtn">
+                                <i class="fas fa-question-circle"></i> Ask Question
+                            </button>
+                            <button class="btn btn-outline w-full" id="requestRepeatBtn">
+                                <i class="fas fa-redo"></i> Request Repeat
+                            </button>
+                            <button class="btn btn-outline w-full" id="needHelpBtn">
+                                <i class="fas fa-hand-paper"></i> Need Help
+                            </button>
+                            <button class="btn btn-outline w-full" id="confusedBtn">
+                                <i class="fas fa-meh"></i> I'm Confused
+                            </button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="space-y-3">
+                            <h5 class="font-bold">Session Stats</h5>
+                            <div class="stats stats-vertical shadow">
+                                <div class="stat">
+                                    <div class="stat-title">Captions Received</div>
+                                    <div class="stat-value" id="studentCaptionCount">0</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-title">Assignments</div>
+                                    <div class="stat-value" id="studentAssignmentCount">0</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-title">Session Duration</div>
+                                    <div class="stat-value" id="studentSessionDuration">0m</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="btn btn-outline w-full" onclick="switchToTeacherView()">
+                            <i class="fas fa-exchange-alt"></i> Switch to Teacher View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-neutral-content py-8 mt-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold">Silent Speak</h3>
+                    <p class="mt-2">Communication aid for students with disabilities</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p class="mt-2">Made with <i class="fas fa-heart text-error"></i> for inclusive education</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/live-session.js"></script>
+    <script>
+        // Initialize live session functionality with authentication check
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Live session page loaded');
+            
+            // Check if user is authenticated
+            checkAuthentication();
+        });
+        
+        function checkAuthentication() {
+            let user = null;
+            
+            // Try to use auth system if available
+            if (window.auth && typeof window.auth.getCurrentUser === 'function') {
+                user = window.auth.getCurrentUser();
+            }
+            
+            // Fallback to localStorage check
+            if (!user) {
+                const userData = localStorage.getItem('silentSpeakCurrentUser') ||
+                                localStorage.getItem('silentSpeakUser') ||
+                                localStorage.getItem('currentUser');
+                
+                if (!userData) {
+                    // No user logged in, redirect to login page
+                    alert('Please login first to access live session.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                try {
+                    user = JSON.parse(userData);
+                } catch (e) {
+                    console.error('Error parsing user data:', e);
+                    alert('Authentication error. Please login again.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+            }
+            
+            console.log('User authenticated:', user);
+            
+            // Determine user role
+            const userRole = user.role || 'student';
+            
+            // Hide role selection (users can't choose their role)
+            document.getElementById('roleSelection').classList.add('hidden');
+            
+            // Show appropriate panel based on user role
+            if (userRole === 'teacher') {
+                document.getElementById('teacherPanel').classList.remove('hidden');
+                // Initialize teacher session
+                if (window.liveSession) {
+                    window.liveSession.selectRole('teacher');
+                }
+            } else {
+                // Default to student role
+                document.getElementById('studentPanel').classList.remove('hidden');
+                // Initialize student session
+                if (window.liveSession) {
+                    window.liveSession.selectRole('student');
+                }
+            }
+            
+            // Update user info in navbar if needed
+            updateUserInfo(user);
+        }
+        
+        function updateUserInfo(user) {
+            // Update user name in navbar if elements exist
+            const userNameElements = document.querySelectorAll('.user-name');
+            userNameElements.forEach(element => {
+                if (user.name) {
+                    element.textContent = user.name;
+                }
+            });
+            
+            const userRoleElements = document.querySelectorAll('.user-role');
+            userRoleElements.forEach(element => {
+                if (user.role) {
+                    element.textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+                }
+            });
+            
+            // Update user avatar images
+            const userAvatarElements = document.querySelectorAll('.user-avatar');
+            userAvatarElements.forEach(element => {
+                if (user.avatar) {
+                    element.src = user.avatar;
+                } else if (user.name) {
+                    // Generate avatar from name if no avatar URL
+                    element.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=007bff&color=fff&size=100`;
+                }
+            });
+            
+            // Update user email if elements exist
+            const userEmailElements = document.querySelectorAll('.user-email');
+            userEmailElements.forEach(element => {
+                if (user.email) {
+                    element.textContent = user.email;
+                }
+            });
+        }
+        
+        function copySessionCode() {
+            const code = document.getElementById('sessionCode').value;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Session code copied to clipboard: ' + code);
+            });
+        }
+        
+        function clearCaptions() {
+            const captionBox = document.getElementById('teacherCaptionBox');
+            if (captionBox) {
+                captionBox.innerHTML = '<div class="text-center py-8 text-base-content/50">Captions will appear here when session starts</div>';
+            }
+        }
+        
+        function switchToStudentView() {
+            document.getElementById('teacherPanel').classList.add('hidden');
+            document.getElementById('studentPanel').classList.remove('hidden');
+            if (window.liveSession) {
+                window.liveSession.selectRole('student');
+            }
+        }
+        
+        function switchToTeacherView() {
+            document.getElementById('studentPanel').classList.add('hidden');
+            document.getElementById('teacherPanel').classList.remove('hidden');
+            if (window.liveSession) {
+                window.liveSession.selectRole('teacher');
+            }
+        }
+    </script>
+</body>
+</html>

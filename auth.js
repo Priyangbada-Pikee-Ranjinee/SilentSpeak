@@ -178,4 +178,34 @@ class AuthSystem {
         return { success: true, message: 'Password changed successfully' };
     }
 
+
+     // Password validation
+    validatePassword(password) {
+        const minLength = 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumbers = /\d/.test(password);
+        
+        return {
+            isValid: password.length >= minLength && hasUpperCase && hasLowerCase && hasNumbers,
+            minLength: password.length >= minLength,
+            hasUpperCase,
+            hasLowerCase,
+            hasNumbers
+        };
+    }
+    
+    
+    // Simple hash function (for demo only - in production use bcrypt or similar)
+    hashPassword(password) {
+        // This is a simple demo hash - NOT secure for production
+        let hash = 0;
+        for (let i = 0; i < password.length; i++) {
+            const char = password.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32-bit integer
+        }
+        return hash.toString();
+    }
+
 }

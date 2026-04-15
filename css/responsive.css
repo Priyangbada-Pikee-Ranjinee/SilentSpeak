@@ -74,3 +74,55 @@
         font-size: 0.875rem;
     }
 }
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .display-6 {
+        font-size: 2rem;
+    }
+    
+    .feature-icon-large {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .pomodoro-timer {
+        font-size: 3.5rem;
+    }
+    
+    .caption-box {
+        height: 250px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .col-md-4 .feature-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .sidebar {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .container-fluid {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container-fluid {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}

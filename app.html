@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SilentSpeak</title>
+  <link rel="stylesheet" href="css/main.css" />
+
+</head>
+<body class="theme-dark" data-font="standard" data-size="medium">
+    <section id="screen-splash" class="screen active">
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="app.html">
+                <i class="fas fa-comments"></i> Silent Speak
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="app.html"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-cogs"></i> Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="pages/live-session.html"><i class="fas fa-broadcast-tower"></i> Live Session</a></li>
+                            <li><a class="dropdown-item" href="pages/text-to-speech.html"><i class="fas fa-text-height"></i> Text to Speech</a></li>
+                            <li><a class="dropdown-item" href="pages/speech-to-text.html"><i class="fas fa-microphone"></i> Speech to Text</a></li>
+                            <li><a class="dropdown-item" href="pages/notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                            <li><a class="dropdown-item" href="pages/pomodoro.html"><i class="fas fa-clock"></i> Pomodoro Timer</a></li>
+                            <li><a class="dropdown-item" href="pages/quick-communication.html"><i class="fas fa-comment-dots"></i> Quick Communication</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/settings.html"><i class="fas fa-sliders-h"></i> Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/profile.html"><i class="fas fa-user"></i> Profile</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> John Doe
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="pages/profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Account Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+<h1 class="splash-title">SilentSpeak</h1>
+
+<p class="splash-sub">
+Classroom Communication Reimagined
+</p>
+
+<button onclick="App.showScreen('screen-role')">
+Get Started
+</button>
+
+</section>
+
+<section id="screen-role" class="screen">
+
+<h2>Select Role</h2>
+
+<button onclick="App.selectRole('teacher')">
+Teacher
+</button>
+
+<button onclick="App.selectRole('student')">
+Student
+</button>
+
+</section>
+<textarea id="tts-input"></textarea>
+
+<button onclick="App.speak()">
+Speak
+</button>
+
+<h2>Live Teacher Caption</h2>
+
+<button onclick="startRecognition()">Start Listening</button>
+
+<p id="caption"></p>
+
+</body>
+</html>

@@ -1,0 +1,208 @@
+/* Silent Speak - Responsive Styles (Tailwind Compatible) */
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    /* Custom component adjustments for mobile */
+    .hero-section {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+    
+    .feature-icon-large {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .feature-icon-large i {
+        font-size: 2.5rem;
+    }
+    
+    .pomodoro-timer {
+        font-size: 3rem;
+    }
+    
+    .caption-box {
+        height: 200px;
+    }
+    
+    .quick-button {
+        min-height: 60px;
+        font-size: 1rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .feature-icon-large {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .pomodoro-timer {
+        font-size: 3.5rem;
+    }
+    
+    .caption-box {
+        height: 250px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) - Updated to align with Tailwind lg: 1024px */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+    /* Custom adjustments for tablets */
+    .sidebar {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Large devices (desktops, 1024px and up) - Updated to align with Tailwind lg: 1024px */
+@media (min-width: 1024px) and (max-width: 1279.98px) {
+    /* Container adjustments */
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+/* Mobile Navigation - Updated for DaisyUI (aligned with Tailwind lg: 1024px) */
+@media (max-width: 1023.98px) {
+    /* Keep navbar clean - ensure dropdowns are not clipped */
+    .navbar {
+        width: 100%;
+        overflow: visible !important;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+}
+
+/* Tablet Landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .hero-section .flex-col {
+        flex-direction: row !important;
+    }
+    
+    .feature-card {
+        height: 100%;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    footer,
+    .btn,
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0;
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+    
+    a {
+        color: black !important;
+        text-decoration: underline !important;
+    }
+    
+    /* Ensure content prints properly */
+    .print-content {
+        display: block !important;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    body {
+        background-color: black !important;
+        color: white !important;
+    }
+    
+    .card {
+        background-color: #222 !important;
+        color: white !important;
+        border: 2px solid white !important;
+    }
+    
+    .btn {
+        border: 2px solid white !important;
+    }
+    
+    a {
+        color: #87ceeb !important;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .card,
+    .btn,
+    .feature-card {
+        transition: none !important;
+    }
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+    /* These styles will complement DaisyUI's dark theme */
+    .caption-box {
+        background-color: hsl(var(--n));
+        border-color: hsl(var(--nf));
+    }
+    
+    .voice-preview {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .quick-button,
+    .card {
+        min-height: 44px; /* Minimum touch target size */
+    }
+    
+    .btn-lg {
+        min-height: 48px;
+    }
+    
+    /* Increase spacing for touch */
+    .space-y-3 > * + * {
+        margin-top: 1rem;
+    }
+    
+    /* Larger hit areas */
+    input, select, textarea {
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+}

@@ -1,0 +1,214 @@
+/* Silent Speak - Main Stylesheet (Tailwind Compatible) */
+
+:root {
+    /* Accessibility Colors */
+    --colorblind-blue: #0072B2;
+    --colorblind-orange: #E69F00;
+    --colorblind-green: #009E73;
+    --colorblind-red: #D55E00;
+    --colorblind-yellow: #F0E442;
+    --colorblind-purple: #CC79A7;
+}
+
+/* Base Styles - Keep only essential overrides */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Typography - Remove Bootstrap-specific classes, keep only custom ones */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+}
+
+/* Navigation - Updated for DaisyUI compatibility */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Section - Updated for Tailwind */
+.hero-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 0 0 20px 20px;
+}
+
+/* Feature Cards - Keep custom styles */
+.feature-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Feature Icons - Moved to tailwind.css */
+
+/* Cards - Keep custom hover effects */
+.card {
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+footer a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
+/* Accessibility Classes */
+.colorblind-friendly {
+    --primary: var(--colorblind-blue);
+    --secondary: var(--colorblind-orange);
+    --success: var(--colorblind-green);
+    --error: var(--colorblind-red);
+    --warning: var(--colorblind-yellow);
+    --info: var(--colorblind-purple);
+}
+
+.high-contrast {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.high-contrast .card {
+    background-color: #222 !important;
+    color: #fff !important;
+}
+
+.high-contrast .navbar {
+    background-color: #111 !important;
+}
+
+/* Live Session Styles */
+.caption-box {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+}
+
+.caption-line {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.caption-line:last-child {
+    border-bottom: none;
+}
+
+/* Speech Interface */
+.speech-interface {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.voice-preview {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+/* Quick Communication */
+.quick-button {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.quick-button:hover {
+    transform: scale(1.05);
+}
+
+/* Pomodoro Timer */
+.pomodoro-timer {
+    font-size: 5rem;
+    font-weight: 700;
+    text-align: center;
+    color: hsl(var(--er));
+}
+
+.task-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Notes Gallery */
+.note-card {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.note-card .card-body {
+    overflow: hidden;
+}
+
+.note-card .card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Custom utility classes that don't conflict with Tailwind */
+.text-balance {
+    text-wrap: balance;
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .card {
+        break-inside: avoid;
+    }
+}

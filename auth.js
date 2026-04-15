@@ -231,4 +231,28 @@ class AuthSystem {
         };
     }
 
+     // Get all users (admin function)
+    getAllUsers() {
+        return this.users.map(user => ({ ...user, password: undefined }));
+    }
+    
+    // Delete user (admin function)
+    deleteUser(userId) {
+        const initialLength = this.users.length;
+        this.users = this.users.filter(u => u.id !== userId);
+        
+        if (this.users.length < initialLength) {
+            this.saveUsers();
+            
+            // If deleted user is current user, logout
+            if (this.currentUser && this.currentUser.id === userId) {
+                this.logout();
+            }
+            
+            return { success: true, message: 'User deleted successfully' };
+        }
+        
+        return { success: false, message: 'User not found' };
+    }
+
 }

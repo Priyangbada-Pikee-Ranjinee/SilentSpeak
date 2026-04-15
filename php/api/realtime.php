@@ -159,4 +159,157 @@ function getUpdates() {
     
     sendSuccess($updates, 'Updates retrieved');
 }
+
+/**
+ * Subscribe to session updates (for WebSocket implementation)
+ */
+function subscribe() {
+    $user = requireAuth();
+    $sessionId = $_GET['session_id'] ?? 0;
+    
+    if (!$sessionId) {
+        sendError('Session ID is required', 400);
+    }
+    
+    // In a real implementation, this would register the client with a WebSocket server
+    // For polling, we just return success
+    sendSuccess([
+        'session_id' => $sessionId,
+        'user_id' => $user->id,
+        'subscription_id' => uniqid('sub_', true)
+    ], 'Subscribed to session updates');
+}
+
+/**
+ * Unsubscribe from session updates
+ */
+function unsubscribe() {
+    $user = requireAuth();
+    $subscriptionId = $_GET['subscription_id'] ?? '';
+    
+    if (!$subscriptionId) {
+        sendError('Subscription ID is required', 400);
+    }
+    
+    // In a real implementation, this would remove the client from WebSocket server
+    sendSuccess([], 'Unsubscribed from session updates');
+}
+
+/**
+ * Long polling endpoint (waits for updates)
+ */
+function longPoll() {
+    $user = requireAuth();
+    $sessionId = $_GET['session_id'] ?? 0;
+    $lastUpdate = $_GET['last_update'] ?? 0;
+    $timeout = $_GET['timeout'] ?? 30;
+    
+    if (!$sessionId) {
+        sendError('Session ID is required', 400);
+    }
+    
+    $conn = getDatabaseConnection();
+    if (!$conn) {
+        sendError('Database connection failed', 500);
+    }
+    
+    // Check if user has access to this session
+    if ($user->role === 'teacher') {
+        $checkStmt = $conn->prepare("
+            SELECT * FROM sessions WHERE id = ? AND teacher_id = ?
+        ");
+        $checkStmt->bind_param("ii", $sessionId, $user->id);
+    } else {
+        $checkStmt = $conn->prepare("
+            SELECT * FROM session_participants
+            WHERE session_id = ? AND student_id = ? AND left_at IS NULL
+        ");
+        $checkStmt->bind_param("ii", $sessionId, $user->id);
+    }
+    
+    $checkStmt->execute();
+    $checkResult = $checkStmt->get_result();
+    
+    if ($checkResult->num_rows === 0) {
+        sendError('You do not have access to this session', 403);
+    }
+    
+    $startTime = time();
+    $updates = null;
+    
+    // Poll for updates until timeout or updates found
+    while (time() - $startTime < $timeout) {
+        $updates = checkForUpdates($conn, $sessionId, $lastUpdate);
+        
+        if (!empty($updates['captions']) || !empty($updates['messages']) || 
+            !empty($updates['tasks']) || !empty($updates['participants'])) {
+            break;
+        }
+        
+        // Sleep for 1 second before checking again
+        sleep(1);
+    }
+    
+    if ($updates === null) {
+        $updates = checkForUpdates($conn, $sessionId, $lastUpdate);
+    }
+    
+    $updates['timestamp'] = time();
+    sendSuccess($updates, 'Updates retrieved');
+}
+
+/**
+ * Check for updates in database
+ */
+function checkForUpdates($conn, $sessionId, $lastUpdate) {
+    $updates = [
+        'captions' => [],
+        'messages' => [],
+        'tasks' => [],
+        'participants' => []
+    ];
+    
+    // Get new captions
+    $captionStmt = $conn->prepare("
+        SELECT c.*, u.first_name, u.last_name
+        FROM captions c
+        JOIN users u ON c.user_id = u.id
+        WHERE c.session_id = ? AND c.created_at > FROM_UNIXTIME(?)
+        ORDER BY c.created_at ASC
+        LIMIT 50
+    ");
+    
+    $captionStmt->bind_param("ii", $sessionId, $lastUpdate);
+    $captionStmt->execute();
+    $captionResult = $captionStmt->get_result();
+    
+    while ($row = $captionResult->fetch_assoc()) {
+        $updates['captions'][] = $row;
+    }
+    
+    // Get new messages
+    $messageStmt = $conn->prepare("
+        SELECT m.*, 
+               s.first_name as sender_first_name, 
+               s.last_name as sender_last_name,
+               r.first_name as recipient_first_name,
+               r.last_name as recipient_last_name
+        FROM session_messages m
+        JOIN users s ON m.sender_id = s.id
+        LEFT JOIN users r ON m.recipient_id = r.id
+        WHERE m.session_id = ? AND m.created_at > FROM_UNIXTIME(?)
+        ORDER BY m.created_at ASC
+        LIMIT 50
+    ");
+    
+    $messageStmt->bind_param("ii", $sessionId, $lastUpdate);
+    $messageStmt->execute();
+    $messageResult = $messageStmt->get_result();
+    
+    while ($row = $messageResult->fetch_assoc()) {
+        $updates['messages'][] = $row;
+    }
+    
+    return $updates;
+}
 ?>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Speak - Main Dashboard</title>
+    <!-- Tailwind CSS + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="font-sans overflow-x-hidden">
+    <!-- Navigation - Refactored for proper responsive behavior -->
+    <nav class="navbar bg-primary text-primary-content shadow-lg">
+        <div class="w-full flex items-center justify-between px-4">
+            <!-- Logo/Brand -->
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="app.html">
+                    <i class="fas fa-comments mr-2"></i> Silent Speak
+                </a>
+            </div>
+
+            <!-- Desktop Navigation (hidden on mobile, visible on lg and up) -->
+            <div class="hidden lg:flex flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="app.html" class="text-white hover:bg-primary-focus"><i class="fas fa-home mr-2"></i>Dashboard</a></li>
+                    <li>
+                        <details class="dropdown">
+                            <summary class="text-white hover:bg-primary-focus"><i class="fas fa-cogs mr-2"></i>Tools</summary>
+                            <ul class="bg-base-100 p-2 shadow-lg rounded-box w-52">
+                                <li><a href="pages/live-session.html"><i class="fas fa-broadcast-tower mr-2"></i>Live Session</a></li>
+                                <li><a href="pages/text-to-speech.html"><i class="fas fa-text-height mr-2"></i>Text to Speech</a></li>
+                                <li><a href="pages/speech-to-text.html"><i class="fas fa-microphone mr-2"></i>Speech to Text</a></li>
+                                <li><a href="pages/notes.html"><i class="fas fa-sticky-note mr-2"></i>Notes</a></li>
+                                <li><a href="pages/pomodoro.html"><i class="fas fa-clock mr-2"></i>Pomodoro Timer</a></li>
+                                <li><a href="pages/quick-communication.html"><i class="fas fa-comment-dots mr-2"></i>Quick Communication</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                    <li><a href="pages/settings.html" class="text-white hover:bg-primary-focus"><i class="fas fa-sliders-h mr-2"></i>Settings</a></li>
+                    <!-- Desktop User Dropdown -->
+                    <li>
+                        <div class="dropdown dropdown-bottom relative z-50">
+                            <label tabindex="0" class="btn btn-outline btn-light ml-2">
+                                <i class="fas fa-user-circle mr-2"></i> John Doe
+                            </label>
+                            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow z-[9999] absolute">
+                                <li><a href="pages/profile.html"><i class="fas fa-user-edit mr-2"></i>Edit Profile</a></li>
+                                <li><a href="#"><i class="fas fa-cog mr-2"></i>Account Settings</a></li>
+                                <li class="divider"></li>
+                                <li><a href="index.html" class="text-error"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Mobile Navigation (visible on mobile, hidden on desktop) -->
+            <div class="flex-none lg:hidden">
+                <!-- Mobile User Dropdown -->
+                <div class="dropdown dropdown-end relative z-50 mr-2">
+                    <label tabindex="0" class="btn btn-ghost btn-circle">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </label>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-[9999] absolute">
+                        <li><a href="pages/profile.html"><i class="fas fa-user-edit mr-2"></i>Edit Profile</a></li>
+                        <li><a href="#"><i class="fas fa-cog mr-2"></i>Account Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="index.html" class="text-error"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Mobile Hamburger Menu -->
+                <div class="dropdown dropdown-end relative z-50">
+                    <label tabindex="0" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                    </label>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-[9999] absolute text-base-content">
+                        <li><a href="app.html" class="active"><i class="fas fa-home mr-2"></i>Dashboard</a></li>
+                        <li>
+                            <details>
+                                <summary><i class="fas fa-cogs mr-2"></i>Tools</summary>
+                                <ul>
+                                    <li><a href="pages/live-session.html"><i class="fas fa-broadcast-tower mr-2"></i>Live Session</a></li>
+                                    <li><a href="pages/text-to-speech.html"><i class="fas fa-text-height mr-2"></i>Text to Speech</a></li>
+                                    <li><a href="pages/speech-to-text.html"><i class="fas fa-microphone mr-2"></i>Speech to Text</a></li>
+                                    <li><a href="pages/notes.html"><i class="fas fa-sticky-note mr-2"></i>Notes</a></li>
+                                    <li><a href="pages/pomodoro.html"><i class="fas fa-clock mr-2"></i>Pomodoro Timer</a></li>
+                                    <li><a href="pages/quick-communication.html"><i class="fas fa-comment-dots mr-2"></i>Quick Communication</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li><a href="pages/settings.html"><i class="fas fa-sliders-h mr-2"></i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="index.html" class="text-error"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="w-full px-4 mt-20">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Sidebar -->
+            <div class="lg:w-1/4 hidden md:block">
+                <div class="card shadow-lg mb-6">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-user-circle mr-2"></i> User Profile</h2>
+                        <div class="avatar flex justify-center mb-4">
+                            <div class="w-24 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=007bff&color=fff&size=100" alt="Profile" />
+                            </div>
+                        </div>
+                        <p class="text-center font-bold text-lg">John Doe</p>
+                        <p class="text-center text-gray-500 mb-4">Student • Semester 5</p>
+                        <div class="divider"></div>
+                        <div class="space-y-3">
+                            <p><i class="fas fa-heartbeat text-error mr-2"></i> <span class="font-medium">Disability:</span> Hearing Impairment</p>
+                            <p><i class="fas fa-palette text-info mr-2"></i> <span class="font-medium">Theme:</span> Color Blind Friendly</p>
+                            <p><i class="fas fa-font text-success mr-2"></i> <span class="font-medium">Font Size:</span> Large</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-bell mr-2"></i> Notifications</h2>
+                        <div class="space-y-3">
+                            <div class="alert shadow-sm">
+                                <div>
+                                    <span class="text-xs opacity-70">10 min ago</span>
+                                    <h4 class="font-bold">Math Class</h4>
+                                    <div class="text-sm">Starts in 15 minutes</div>
+                                </div>
+                            </div>
+                            <div class="alert shadow-sm">
+                                <div>
+                                    <span class="text-xs opacity-70">1 hour ago</span>
+                                    <h4 class="font-bold">Assignment</h4>
+                                    <div class="text-sm">Due tomorrow</div>
+                                </div>
+                            </div>
+                            <div class="alert shadow-sm">
+                                <div>
+                                    <span class="text-xs opacity-70">2 hours ago</span>
+                                    <h4 class="font-bold">Teacher Sarah</h4>
+                                    <div class="text-sm">Sent a new message</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Dashboard -->
+            <div class="lg:w-3/4">
+                <div class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-2">Welcome to Silent Speak Dashboard</h1>
+                    <p class="text-lg text-gray-600">Select a tool to help with classroom communication and learning.</p>
+                </div>
+
+                <!-- Feature Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Live Session Card -->
+                    <div class="card bg-base-100 shadow-xl card-hover cursor-pointer" onclick="window.location.href='pages/live-session.html'">
+                        <div class="card-body text-center p-6">
+                            <div class="feature-icon-large mb-4">
+                                <i class="fas fa-broadcast-tower fa-4x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-3">Live Session</h3>
+                            <p class="text-gray-600 mb-4">Join or create a classroom session with real-time captioning and communication.</p>
+                            <div class="mb-4">
+                                <span class="badge badge-success">Active Session: Math 101</span>
+                            </div>
+                            <button class="btn btn-primary btn-lg w-full">Start Live Session</button>
+                        </div>
+                    </div>
+
+                    <!-- Text to Speech Card -->
+                    <div class="card bg-base-100 shadow-xl card-hover cursor-pointer" onclick="window.location.href='pages/text-to-speech.html'">
+                        <div class="card-body text-center p-6">
+                            <div class="feature-icon-large mb-4">
+                                <i class="fas fa-text-height fa-4x text-info"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-3">Text to Speech</h3>
+                            <p class="text-gray-600 mb-4">Convert written text to spoken words with multiple language and voice options.</p>
+                            <div class="mb-4">
+                                <span class="badge badge-info">Bangla/English/Banglish</span>
+                            </div>
+                            <button class="btn btn-info btn-lg w-full">Use Text to Speech</button>
+                        </div>
+                    </div>
+
+                    <!-- Speech to Text Card -->
+                    <div class="card bg-base-100 shadow-xl card-hover cursor-pointer" onclick="window.location.href='pages/speech-to-text.html'">
+                        <div class="card-body text-center p-6">
+                            <div class="feature-icon-large mb-4">
+                                <i class="fas fa-microphone fa-4x text-success"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-3">Speech to Text</h3>
+                            <p class="text-gray-600 mb-4">Convert spoken words to text with real-time captioning and note saving.</p>
+                            <div class="mb-4">
+                                <span class="badge badge-success">Live Captioning</span>
+                            </div>
+                            <button class="btn btn-success btn-lg w-full">Start Speaking</button>
+                        </div>
+                    </div>
+
+                    <!-- Notes Card -->
+                    <div class="card bg-base-100 shadow-xl card-hover cursor-pointer" onclick="window.location.href='pages/notes.html'">
+                        <div class="card-body text-center p-6">
+                            <div class="feature-icon-large mb-4">
+                                <i class="fas fa-sticky-note fa-4x text-warning"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-3">Notes</h3>
+                            <p class="text-gray-600 mb-4">Access all your saved notes, captions, and study materials organized by date and session.</p>
+                            <div class="mb-4">
+                                <span class="badge badge-warning">24 Notes</span>
+                            </div>
+                            <button class="btn btn-warning btn-lg w-full">View All Notes</button>
+                        </div>
+                    </div>
+
+                    <!-- Pomodoro Card -->
+                    <div class="card bg-base-100 shadow-xl card-hover cursor-pointer" onclick="window.location.href='pages/pomodoro.html'">
+                        <div class="card-body text-center p-6">
+                            <div class="feature-icon-large mb-4">
+                                <i class="fas fa-clock fa-4x text-error"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-3">Pomodoro Timer</h3>
+                            <p class="text-gray-600 mb-4">Focus timer with task management for studying and completing assignments.</p>
+                            <div class="mb-4">
+                                <span class="badge badge-error">3 Tasks Pending</span>
+                            </div>
+                            <button class="btn btn-error btn-lg w-full">Start Timer</button>
+                        </div>
+                    </div>
+
+                    <!-- Quick Communication Card -->
+                    <div class="card bg-base-100 shadow-xl card-hover cursor-pointer" onclick="window.location.href='pages/quick-communication.html'">
+                        <div class="card-body text-center p-6">
+                            <div class="feature-icon-large mb-4">
+                                <i class="fas fa-comment-dots fa-4x text-secondary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-3">Quick Communication</h3>
+                            <p class="text-gray-600 mb-4">Pre-set buttons for common phrases and emergency communication with voice output.</p>
+                            <div class="mb-4">
+                                <span class="badge badge-secondary">15 Quick Phrases</span>
+                            </div>
+                            <button class="btn btn-secondary btn-lg w-full">Open Communicator</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h2 class="card-title text-xl mb-4"><i class="fas fa-history mr-2"></i> Recent Activity</h2>
+                        <div class="overflow-x-auto">
+                            <table class="table table-zebra">
+                                <thead>
+                                    <tr>
+                                        <th>Date & Time</th>
+                                        <th>Activity</th>
+                                        <th>Session</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Today, 10:30 AM</td>
+                                        <td>Joined Math 101 Live Session</td>
+                                        <td>Math 101</td>
+                                        <td>45 min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Yesterday, 2:15 PM</td>
+                                        <td>Saved Speech-to-Text notes</td>
+                                        <td>English Class</td>
+                                        <td>30 min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Apr 8, 9:00 AM</td>
+                                        <td>Used Quick Communication</td>
+                                        <td>Physics Lab</td>
+                                        <td>10 min</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Apr 7, 11:30 AM</td>
+                                        <td>Completed Pomodoro session</td>
+                                        <td>Study Session</td>
+                                        <td>25 min</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-neutral-content py-8 mt-10">
+        <div class="w-full px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h5 class="text-xl font-bold"><i class="fas fa-comments mr-2"></i> Silent Speak</h5>
+                    <p>Communication aid for students with disabilities.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p>Academic Design Project-2 | <a href="index.html" class="link">Back to Landing Page</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Add hover effects for cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

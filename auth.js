@@ -16,7 +16,7 @@ class AuthSystem {
         localStorage.setItem('silentSpeakUsers', JSON.stringify(this.users));
     }
 
-    
+
      // Register a new user
     register(userData) {
         // Validate required fields
@@ -69,6 +69,39 @@ class AuthSystem {
             success: true, 
             message: 'Registration successful!',
             user: { ...user, password: undefined } // Don't return password
+        };
+    }
+
+
+    // Login user
+    login(email, password) {
+        // Find user
+        const user = this.users.find(u => u.email === email);
+        
+        if (!user) {
+            return { success: false, message: 'User not found' };
+        }
+        
+        // Check password (in production, compare hashed passwords)
+        if (this.hashPassword(password) !== user.password) {
+            return { success: false, message: 'Invalid password' };
+        }
+        
+        // Update last login
+        user.lastLogin = new Date().toISOString();
+        this.saveUsers();
+        
+        // Set current user (without password)
+        this.currentUser = { ...user, password: undefined };
+        this.isAuthenticated = true;
+        
+        // Save to session
+        localStorage.setItem('silentSpeakCurrentUser', JSON.stringify(this.currentUser));
+        
+        return { 
+            success: true, 
+            message: 'Login successful!',
+            user: this.currentUser
         };
     }
 }

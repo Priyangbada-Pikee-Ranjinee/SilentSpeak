@@ -9,6 +9,19 @@
 </head>
 <body class="theme-dark" data-font="standard" data-size="medium">
     <section id="screen-splash" class="screen active">
+      <h1 class="splash-title">SilentSpeak</h1>
+
+<p class="splash-sub">
+Classroom Communication Reimagined
+</p>
+
+<button onclick="App.showScreen('screen-role')">
+Get Started
+</button>
+
+</section>
+
+<section id="screen-role" class="screen">
 <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
@@ -59,19 +72,50 @@
             </div>
         </div>
     </nav>
-<h1 class="splash-title">SilentSpeak</h1>
 
-<p class="splash-sub">
-Classroom Communication Reimagined
-</p>
+     <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4 d-none d-md-block">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-user-circle"></i> User Profile</h5>
+                        <div class="text-center mb-3">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=007bff&color=fff&size=100" 
+                                 class="rounded-circle" alt="Profile">
+                        </div>
+                        <p class="text-center"><strong>John Doe</strong></p>
+                        <p class="text-center text-muted">Student • Semester 5</p>
+                        <hr>
+                        <p><i class="fas fa-heartbeat text-danger"></i> <strong>Disability:</strong> Hearing Impairment</p>
+                        <p><i class="fas fa-palette text-info"></i> <strong>Theme:</strong> Color Blind Friendly</p>
+                        <p><i class="fas fa-font text-success"></i> <strong>Font Size:</strong> Large</p>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-bell"></i> Notifications</h5>
+                        <div class="list-group list-group-flush">
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <small>10 min ago</small><br>
+                                <strong>Math Class</strong> starts in 15 minutes
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <small>1 hour ago</small><br>
+                                <strong>Assignment</strong> due tomorrow
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <small>2 hours ago</small><br>
+                                <strong>Teacher Pikee</strong> sent a new message
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<button onclick="App.showScreen('screen-role')">
-Get Started
-</button>
 
-</section>
-
-<section id="screen-role" class="screen">
 
 <h2>Select Role</h2>
 

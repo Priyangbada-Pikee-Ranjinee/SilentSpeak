@@ -194,7 +194,7 @@ class AuthSystem {
             hasNumbers
         };
     }
-    
+
     
     // Simple hash function (for demo only - in production use bcrypt or similar)
     hashPassword(password) {
@@ -206,6 +206,29 @@ class AuthSystem {
             hash = hash & hash; // Convert to 32-bit integer
         }
         return hash.toString();
+    }
+
+    
+    // Reset password (demo)
+    resetPassword(email) {
+        const user = this.users.find(u => u.email === email);
+        if (!user) {
+            return { success: false, message: 'User not found' };
+        }
+        
+        // Generate temporary password
+        const tempPassword = Math.random().toString(36).slice(-8);
+        user.password = this.hashPassword(tempPassword);
+        this.saveUsers();
+        
+        // In production, send email with temp password
+        console.log(`Password reset for ${email}. Temporary password: ${tempPassword}`);
+        
+        return { 
+            success: true, 
+            message: 'Password reset instructions sent to your email',
+            tempPassword: tempPassword // Only for demo
+        };
     }
 
 }

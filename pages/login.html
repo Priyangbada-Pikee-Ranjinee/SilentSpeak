@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Silent Speak</title>
+    <!-- Tailwind CSS + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="font-sans"> 
+    <!-- Navigation -->
+    <nav class="navbar bg-primary text-primary-content shadow-lg">
+        <div class="container mx-auto">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="../index.html">
+                    <i class="fas fa-comments mr-2"></i> Silent Speak
+                </a>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end lg:hidden relative z-50">
+                    <label tabindex="0" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                    </label>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-[9999] absolute text-base-content">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#features">Features</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li><a href="register.html" class="btn btn-sm btn-light mt-2">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="../index.html" class="text-white hover:bg-primary-focus">Home</a></li>
+                        <li><a href="../index.html#features" class="text-white hover:bg-primary-focus">Features</a></li>
+                        <li><a href="../index.html#about" class="text-white hover:bg-primary-focus">About</a></li>
+                        <li><a href="register.html" class="btn btn-light ml-2">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Login Form Column -->
+                <div class="lg:w-1/2">
+                    <div class="card shadow-2xl border-0">
+                        <div class="card-body p-8">
+                            <div class="text-center mb-6">
+                                <h2 class="text-3xl font-bold mb-2">Login to Silent Speak</h2>
+                                <p class="text-gray-500">Access your account to continue</p>
+                            </div>
+                            
+                            <form id="loginForm">
+                                <div class="form-control mb-6">
+                                    <label class="label" for="email">
+                                        <span class="label-text font-semibold">Email Address</span>
+                                    </label>
+                                    <div class="input input-bordered flex items-center gap-2">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                        <input type="email" class="grow" id="email" 
+                                               placeholder="Enter your email" required />
+                                    </div>
+                                    <label class="label">
+                                        <span class="label-text-alt">Use your Gmail or institutional email</span>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-control mb-6">
+                                    <label class="label" for="password">
+                                        <span class="label-text font-semibold">Password</span>
+                                    </label>
+                                    <div class="input input-bordered flex items-center gap-2">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                        <input type="password" class="grow" id="password" 
+                                               placeholder="Enter your password" required />
+                                        <button class="btn btn-ghost btn-sm" type="button" id="togglePassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between mb-6">
+                                    <label class="label cursor-pointer gap-2">
+                                        <input type="checkbox" class="checkbox checkbox-primary" id="rememberMe" />
+                                        <span class="label-text">Remember me</span>
+                                    </label>
+                                    <a href="#" class="link link-primary">Forgot Password?</a>
+                                </div>
+                                
+                                <div class="space-y-4 mb-6">
+                                    <button type="submit" class="btn btn-primary btn-lg w-full">
+                                        <i class="fas fa-sign-in-alt mr-2"></i> Login
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-primary btn-lg w-full demo-login">
+                                        <i class="fas fa-user-check mr-2"></i> Try Demo Login
+                                    </button>
+                                </div>
+                                
+                                <div class="divider">Or login with</div>
+                                
+                                <div class="flex justify-center gap-4 mb-6">
+                                    <button type="button" class="btn btn-outline btn-error">
+                                        <i class="fab fa-google mr-2"></i> Google
+                                    </button>
+                                    <button type="button" class="btn btn-outline">
+                                        <i class="fab fa-microsoft mr-2"></i> Microsoft
+                                    </button>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <p>Don't have an account? <a href="register.html" class="link link-primary font-bold">Sign up here</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Accessibility Features -->
+                    <div class="card mt-6 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title text-lg font-bold mb-4"><i class="fas fa-universal-access mr-2"></i> Accessibility Features</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="space-y-3">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="checkbox checkbox-primary" id="highContrast" />
+                                        <span class="label-text">High Contrast Mode</span>
+                                    </label>
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="checkbox checkbox-primary" id="largeText" />
+                                        <span class="label-text">Large Text</span>
+                                    </label>
+                                </div>
+                                <div class="space-y-3">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="checkbox checkbox-primary" id="colorBlind" />
+                                        <span class="label-text">Color Blind Friendly</span>
+                                    </label>
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="checkbox checkbox-primary" id="screenReader" />
+                                        <span class="label-text">Screen Reader Optimized</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Column -->
+                <div class="lg:w-1/2">
+                    <div class="card border-0 shadow-sm h-full">
+                        <div class="card-body p-8">
+                            <h3 class="text-2xl font-bold mb-6">Why Silent Speak?</h3>
+                            
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-captions fa-2x text-primary mt-1"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold mb-2">Live Captioning</h4>
+                                    <p class="text-gray-600">Get real-time captions of classroom lectures in multiple languages including Bangla, English, and Banglish.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-users fa-2x text-success mt-1"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold mb-2">Inclusive Communication</h4>
+                                    <p class="text-gray-600">Designed specifically for students with hearing, speech, color blindness, and dyslexia disabilities.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-mobile-alt fa-2x text-info mt-1"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold mb-2">Mobile First</h4>
+                                    <p class="text-gray-600">Optimized for mobile devices with responsive design and touch-friendly interfaces.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex mb-6">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-shield-alt fa-2x text-warning mt-1"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold mb-2">Secure & Private</h4>
+                                    <p class="text-gray-600">Your data is encrypted and stored securely. We comply with educational privacy standards.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="divider my-8"></div>
+                            
+                            <div class="alert alert-info">
+                                <div class="flex">
+                                    <i class="fas fa-info-circle text-2xl mr-3"></i>
+                                    <div>
+                                        <h5 class="font-bold">Academic Project</h5>
+                                        <p class="mt-1">Silent Speak is an academic Design Project-2 initiative aimed at creating inclusive communication tools for students with disabilities.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-neutral-content py-8 mt-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h5 class="text-xl font-bold"><i class="fas fa-comments mr-2"></i> Silent Speak</h5>
+                    <p>Communication aid for students with disabilities.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p>Academic Design Project-2 | <a href="../index.html" class="link">Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Safe toast function with fallback
+            function safeToast(message, type = 'info') {
+                if (window.SilentSpeak && window.SilentSpeak.showToast) {
+                    window.SilentSpeak.showToast(message, type);
+                } else {
+                    // Fallback to alert if main.js not loaded
+                    alert(message);
+                    console.log(`Toast (${type}): ${message}`);
+                }
+            }
+            
+            // Safe demo login with fallback
+            function safeDemoLogin() {
+                if (window.SilentSpeak && window.SilentSpeak.demoLogin) {
+                    window.SilentSpeak.demoLogin();
+                } else {
+                    // Fallback demo login
+                    const demoUser = {
+                        id: Date.now(),
+                        name: 'Demo User',
+                        email: 'demo@example.com',
+                        role: 'student',
+                        disabilities: [],
+                        institution: 'Demo University',
+                        semester: '1',
+                        createdAt: new Date().toISOString()
+                    };
+                    localStorage.setItem('silentSpeakUser', JSON.stringify(demoUser));
+                    safeToast('Demo login successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        // Use absolute path from site root to avoid 404
+                        const basePath = window.location.pathname.split('/').slice(0, -2).join('/') || '';
+                        window.location.href = basePath + '/app.html';
+                    }, 1000);
+                }
+            }
+            
+            // Toggle password visibility
+            const togglePasswordBtn = document.getElementById('togglePassword');
+            if (togglePasswordBtn) {
+                togglePasswordBtn.addEventListener('click', function() {
+                    const passwordInput = document.getElementById('password');
+                    const icon = this.querySelector('i');
+                    
+                    if (passwordInput && icon) {
+                        if (passwordInput.type === 'password') {
+                            passwordInput.type = 'text';
+                            icon.classList.remove('fa-eye');
+                            icon.classList.add('fa-eye-slash');
+                        } else {
+                            passwordInput.type = 'password';
+                            icon.classList.remove('fa-eye-slash');
+                            icon.classList.add('fa-eye');
+                        }
+                    }
+                });
+            }
+            
+            // Form submission is handled by auth.js auto-attachment
+            // No need for duplicate validation
+            
+            // Google login button
+            const googleBtn = document.querySelector('.btn-outline.btn-error');
+            if (googleBtn) {
+                googleBtn.addEventListener('click', function() {
+                    safeToast('Google login would be implemented in a production version', 'info');
+                    // For demo purposes, simulate login with a demo Google account
+                    setTimeout(() => {
+                        safeDemoLogin();
+                    }, 1000);
+                });
+            }
+            
+            // Microsoft login button
+            const microsoftBtn = document.querySelector('.btn-outline:not(.btn-error)');
+            if (microsoftBtn && microsoftBtn.textContent.includes('Microsoft')) {
+                microsoftBtn.addEventListener('click', function() {
+                    safeToast('Microsoft login would be implemented in a production version', 'info');
+                    // For demo purposes, simulate login with a demo Microsoft account
+                    setTimeout(() => {
+                        safeDemoLogin();
+                    }, 1000);
+                });
+            }
+            
+            // Accessibility features
+            const highContrastCheck = document.getElementById('highContrast');
+            if (highContrastCheck) {
+                highContrastCheck.addEventListener('change', function() {
+                    document.body.classList.toggle('high-contrast', this.checked);
+                });
+            }
+            
+            const largeTextCheck = document.getElementById('largeText');
+            if (largeTextCheck) {
+                largeTextCheck.addEventListener('change', function() {
+                    document.body.classList.toggle('font-large', this.checked);
+                });
+            }
+            
+            const colorBlindCheck = document.getElementById('colorBlind');
+            if (colorBlindCheck) {
+                colorBlindCheck.addEventListener('change', function() {
+                    document.body.classList.toggle('colorblind-friendly', this.checked);
+                });
+            }
+            
+            // Final safety check: ensure all inputs are enabled
+            setTimeout(() => {
+                const allInputs = document.querySelectorAll('input, select, textarea');
+                allInputs.forEach(input => {
+                    if (input.disabled) {
+                        input.disabled = false;
+                        console.log('Enabled input:', input.id || input.name);
+                    }
+                    input.style.pointerEvents = 'auto';
+                    input.style.userSelect = 'auto';
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>

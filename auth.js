@@ -392,3 +392,59 @@ function handleLoginForm(formId) {
         }
     });
 }
+
+
+function handleRegisterForm(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Collect form data
+        const formData = {
+            email: form.querySelector('#email').value,
+            password: form.querySelector('#password').value,
+            name: `${form.querySelector('#firstName').value} ${form.querySelector('#lastName').value}`,
+            role: form.querySelector('input[name="role"]:checked').value,
+            disabilities: [],
+            institution: form.querySelector('#institution').value || '',
+            semester: form.querySelector('#semester').value || ''
+        };
+
+        
+        // Collect disabilities
+        const disabilityCheckboxes = form.querySelectorAll('input[type="checkbox"][id^="disability"]');
+        disabilityCheckboxes.forEach(checkbox => {
+            if (checkbox.checked && checkbox.id !== 'disabilityNone') {
+                formData.disabilities.push(checkbox.id.replace('disability', '').toLowerCase());
+            }
+        });
+
+        
+        const result = auth.register(formData);
+        
+        if (result.success) {
+            window.SilentSpeak.showToast(result.message, 'success');
+            
+            // Redirect after delay
+            setTimeout(() => {
+                window.location.href = '../app.html';
+            }, 2000);
+        } else {
+            window.SilentSpeak.showToast(result.message, 'danger');
+        }
+    });
+}
+
+
+// Auto-attach to forms if they exist
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('loginForm')) {
+        handleLoginForm('loginForm');
+    }
+    
+    if (document.getElementById('registerForm')) {
+        handleRegisterForm('registerForm');
+    }
+});

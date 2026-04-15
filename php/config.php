@@ -135,5 +135,103 @@ function generateJWT($payload) {
     
     return $base64UrlHeader . "." . $base64UrlPayload . "." . $base64UrlSignature;
 }
+/**
+ * Verify JWT token
+ */
+function verifyJWT($token) {
+    try {
+        $parts = explode('.', $token);
+        if (count($parts) !== 3) {
+            return false;
+        }
+        
+        $signature = hash_hmac('sha256', $parts[0] . "." . $parts[1], JWT_SECRET, true);
+        $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
+        
+        if ($base64UrlSignature !== $parts[2]) {
+            return false;
+        }
+        
+        $payload = json_decode(base64_decode($parts[1]), true);
+        
+        if (isset($payload['exp']) && $payload['exp'] < time()) {
+            return false;
+        }
+        
+        return $payload;
+    } catch (Exception $e) {
+        return false;
+    }
+}
+
+/**
+ * Hash password
+ */
+function hashPassword($password) {
+    return password_hash($password, PASSWORD_BCRYPT, ['cost' => PASSWORD_HASH_COST]);
+}
+
+/**
+ * Verify password
+ */
+function verifyPassword($password, $hash) {
+    return password_verify($password, $hash);
+}
+
+/**
+ * Get authorization header
+ */
+function getAuthorizationHeader() {
+    $headers = null;
+    
+    if (isset($_SERVER['Authorization'])) {
+        $headers = trim($_SERVER['Authorization']);
+    } elseif (isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $headers = trim($_SERVER['HTTP_AUTHORIZATION']);
+    } elseif (function_exists('apache_request_headers')) {
+        $requestHeaders = apache_request_headers();
+        $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
+        
+        if (isset($requestHeaders['Authorization'])) {
+            $headers = trim($requestHeaders['Authorization']);
+        }
+    }
+    
+    return $headers;
+}
+
+/**
+ * Get bearer token
+ */
+function getBearerToken() {
+    $headers = getAuthorizationHeader();
+    
+    if (!empty($headers)) {
+        if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+            return $matches[1];
+        }
+    }
+    
+    return null;
+}
+
+/**
+ * Require authentication
+ */
+function requireAuth() {
+    $token = getBearerToken();
+    
+    if (!$token) {
+        sendError('Authentication token required', 401);
+    }
+    
+    $payload = verifyJWT($token);
+    
+    if (!$payload) {
+        sendError('Invalid or expired token', 401);
+    }
+    
+    return $payload;
+}
 
 ?>

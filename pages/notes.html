@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes & File Storage - Silent Speak</title>
+    <!-- DaisyUI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="font-sans"> 
+    <!-- Navigation -->
+    <nav class="navbar bg-primary text-primary-content shadow-lg">
+        <div class="container mx-auto">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="../app.html">
+                    <i class="fas fa-comments"></i> Silent Speak
+                </a>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end lg:hidden">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-base-content">
+                        <li><a href="../app.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a href="live-session.html"><i class="fas fa-broadcast-tower"></i> Live Session</a></li>
+                        <li><a href="text-to-speech.html"><i class="fas fa-text-height"></i> Text to Speech</a></li>
+                        <li><a href="speech-to-text.html"><i class="fas fa-microphone"></i> Speech to Text</a></li>
+                        <li><a class="active" href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                        <li><a href="pomodoro.html"><i class="fas fa-clock"></i> Pomodoro</a></li>
+                        <li><hr class="my-1"></li>
+                        <li><a href="profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                        <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a class="text-error" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+                <div class="hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="../app.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                        <li><a href="live-session.html"><i class="fas fa-broadcast-tower"></i> Live Session</a></li>
+                        <li><a href="text-to-speech.html"><i class="fas fa-text-height"></i> Text to Speech</a></li>
+                        <li><a href="speech-to-text.html"><i class="fas fa-microphone"></i> Speech to Text</a></li>
+                        <li><a class="active" href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a></li>
+                        <li><a href="pomodoro.html"><i class="fas fa-clock"></i> Pomodoro</a></li>
+                        <li>
+                            <details>
+                                <summary><i class="fas fa-user-circle"></i> Profile</summary>
+                                <ul class="bg-base-100 p-2 shadow-lg rounded-box w-52">
+                                    <li><a href="profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                                    <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                                    <li><hr class="my-1"></li>
+                                    <li><a class="text-error" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 mt-6">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Main Content Area -->
+            <div class="lg:w-2/3">
+                <div class="card shadow-xl border-0">
+                    <div class="card-header bg-success text-success-content p-4">
+                        <h2 class="text-xl font-bold mb-0"><i class="fas fa-sticky-note"></i> Notes & File Storage</h2>
+                    </div>
+                    <div class="card-body p-6">
+                        <!-- Note Editor -->
+                        <div class="mb-6">
+                            <div class="card bg-base-100 shadow-md">
+                                <div class="card-header bg-info text-info-content p-4">
+                                    <h3 class="text-lg font-bold mb-0"><i class="fas fa-edit"></i> Create New Note</h3>
+                                </div>
+                                <div class="card-body p-6">
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Note Title</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered w-full" id="noteTitle" placeholder="Enter note title">
+                                    </div>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Category</span>
+                                        </label>
+                                        <select class="select select-bordered w-full" id="noteCategory">
+                                            <option value="class">Class Notes</option>
+                                            <option value="assignment">Assignments</option>
+                                            <option value="meeting">Meeting Notes</option>
+                                            <option value="personal">Personal</option>
+                                            <option value="todo">To-Do List</option>
+                                            <option value="reference">Reference</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Note Content</span>
+                                        </label>
+                                        <div class="editor-toolbar mb-3 p-2 border border-base-300 rounded-lg bg-base-200">
+                                            <div class="flex flex-wrap gap-1">
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('bold')"><i class="fas fa-bold"></i></button>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('italic')"><i class="fas fa-italic"></i></button>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('underline')"><i class="fas fa-underline"></i></button>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('strikethrough')"><i class="fas fa-strikethrough"></i></button>
+                                                <div class="dropdown dropdown-hover">
+                                                    <div tabindex="0" role="button" class="btn btn-xs btn-outline"><i class="fas fa-heading"></i></div>
+                                                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
+                                                        <li><a onclick="formatText('h1')">Heading 1</a></li>
+                                                        <li><a onclick="formatText('h2')">Heading 2</a></li>
+                                                        <li><a onclick="formatText('h3')">Heading 3</a></li>
+                                                    </ul>
+                                                </div>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('listUl')"><i class="fas fa-list-ul"></i></button>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('listOl')"><i class="fas fa-list-ol"></i></button>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('link')"><i class="fas fa-link"></i></button>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('image')"><i class="fas fa-image"></i></button>
+                                                <button type="button" class="btn btn-xs btn-outline" onclick="formatText('code')"><i class="fas fa-code"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="note-editor p-4 border border-base-300 rounded-lg bg-base-100 min-h-[200px]" id="noteEditor" contenteditable="true">
+                                            <p>Start typing your note here...</p>
+                                            <p>You can format text using the toolbar above.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-control mb-6">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Tags (comma separated)</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered w-full" id="noteTags" placeholder="e.g., math, homework, important">
+                                    </div>
+                                    <div class="flex flex-wrap justify-between items-center">
+                                        <div class="flex gap-2">
+                                            <button class="btn btn-primary" onclick="saveNote()">
+                                                <i class="fas fa-save"></i> Save Note
+                                            </button>
+                                            <button class="btn btn-outline" onclick="clearEditor()">
+                                                <i class="fas fa-trash"></i> Clear
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline btn-info" onclick="enhanceWithAI()">
+                                                <i class="fas fa-magic"></i> Enhance with AI
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="mb-6">
+                            <div class="card bg-base-100 shadow-md">
+                                <div class="card-header bg-warning text-warning-content p-4">
+                                    <h3 class="text-lg font-bold mb-0"><i class="fas fa-upload"></i> File Upload</h3>
+                                </div>
+                                <div class="card-body p-6">
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Upload Files (Max 10MB each)</span>
+                                        </label>
+                                        <input type="file" class="file-input file-input-bordered w-full" id="fileUpload" multiple accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.ppt,.pptx,.xls,.xlsx">
+                                    </div>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">File Description</span>
+                                        </label>
+                                        <textarea class="textarea textarea-bordered w-full" id="fileDescription" rows="2" placeholder="Describe the file content"></textarea>
+                                    </div>
+                                    <div class="form-control mb-6">
+                                        <label class="label">
+                                            <span class="label-text font-semibold">Access Level</span>
+                                        </label>
+                                        <select class="select select-bordered w-full" id="fileAccess">
+                                            <option value="private">Private (Only me)</option>
+                                            <option value="shared">Shared with teacher</option>
+                                            <option value="public">Public (All class members)</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-warning" onclick="uploadFiles()">
+                                        <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                                    </button>
+                                    <div class="progress mt-4 hidden" id="uploadProgress">
+                                        <div class="progress-bar progress-bar-primary h-4 rounded-full" id="uploadProgressBar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notes List -->
+                        <div>
+                            <div class="card bg-base-100 shadow-md">
+                                <div class="card-header bg-secondary text-secondary-content p-4">
+                                    <h3 class="text-lg font-bold mb-0"><i class="fas fa-list"></i> My Notes</h3>
+                                </div>
+                                <div class="card-body p-6">
+                                    <div class="flex flex-col md:flex-row gap-4 mb-6">
+                                        <div class="md:w-1/2">
+                                            <input type="text" class="input input-bordered w-full" id="searchNotes" placeholder="Search notes...">
+                                        </div>
+                                        <div class="md:w-1/2">
+                                            <select class="select select-bordered w-full" id="filterCategory">
+                                                <option value="">All Categories</option>
+                                                <option value="class">Class Notes</option>
+                                                <option value="assignment">Assignments</option>
+                                                <option value="meeting">Meeting Notes</option>
+                                                <option value="personal">Personal</option>
+                                                <option value="todo">To-Do List</option>
+                                                <option value="reference">Reference</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="notes-list space-y-4" id="notesList">
+                                        <!-- Notes will be loaded here -->
+                                        <div class="text-center py-10">
+                                            <i class="fas fa-sticky-note fa-4x text-base-300 mb-4"></i>
+                                            <p class="text-base-content/70">No notes yet. Create your first note above!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:w-1/3">
+                <!-- Storage Stats -->
+                <div class="card shadow-lg mb-6">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4"><i class="fas fa-database"></i> Storage Statistics</h3>
+                        <div class="storage-info mb-6">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm">Used Storage</span>
+                                <span class="text-sm font-semibold" id="usedStorage">0 MB</span>
+                            </div>
+                            <progress class="progress progress-success w-full h-3" id="storageProgress" value="0" max="100"></progress>
+                            <div class="flex justify-between mt-1">
+                                <small class="text-sm text-base-content/70">Total: 100 MB</small>
+                                <small class="text-sm text-base-content/70" id="freeStorage">100 MB free</small>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="stat-item text-center p-3 border border-base-300 rounded-lg">
+                                <h3 class="text-2xl font-bold text-primary" id="totalNotes">0</h3>
+                                <small class="text-sm">Total Notes</small>
+                            </div>
+                            <div class="stat-item text-center p-3 border border-base-300 rounded-lg">
+                                <h3 class="text-2xl font-bold text-success" id="totalFiles">0</h3>
+                                <small class="text-sm">Total Files</small>
+                            </div>
+                            <div class="stat-item text-center p-3 border border-base-300 rounded-lg">
+                                <h3 class="text-2xl font-bold text-warning" id="totalSize">0 MB</h3>
+                                <small class="text-sm">Total Size</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Files -->
+                <div class="card shadow-lg mb-6">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4"><i class="fas fa-file"></i> Recent Files</h3>
+                        <div class="recent-files space-y-3" id="recentFiles">
+                            <div class="file-item flex items-center gap-3 p-3 border border-base-300 rounded-lg">
+                                <i class="fas fa-file-pdf text-error text-xl"></i>
+                                <div class="flex-grow">
+                                    <p class="font-medium text-sm">math_assignment.pdf</p>
+                                    <p class="text-xs text-base-content/70">2 days ago • 2.4 MB</p>
+                                </div>
+                                <button class="btn btn-sm btn-outline">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="file-item flex items-center gap-3 p-3 border border-base-300 rounded-lg">
+                                <i class="fas fa-file-word text-primary text-xl"></i>
+                                <div class="flex-grow">
+                                    <p class="font-medium text-sm">english_essay.docx</p>
+                                    <p class="text-xs text-base-content/70">1 week ago • 1.8 MB</p>
+                                </div>
+                                <button class="btn btn-sm btn-outline">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline btn-sm w-full mt-4" onclick="viewAllFiles()">
+                            <i class="fas fa-folder-open"></i> View All Files
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4"><i class="fas fa-bolt"></i> Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button class="btn btn-outline btn-primary w-full justify-start" onclick="importFromSpeech()">
+                                <i class="fas fa-microphone"></i> Import from Speech-to-Text
+                            </button>
+                            <button class="btn btn-outline btn-success w-full justify-start" onclick="exportAllNotes()">
+                                <i class="fas fa-file-export"></i> Export All Notes
+                            </button>
+                            <button class="btn btn-outline btn-warning w-full justify-start" onclick="backupNotes()">
+                                <i class="fas fa-cloud-upload-alt"></i> Backup to Cloud
+                            </button>
+                            <button class="btn btn-outline btn-error w-full justify-start" onclick="deleteOldNotes()">
+                                <i class="fas fa-trash"></i> Delete Old Notes
+                            </button>
+                        </div>
+                        <hr class="my-4">
+                        <h6 class="font-semibold mb-3">AI Features</h6>
+                        <div class="space-y-2">
+                            <div class="form-control">
+                                <label class="label cursor-pointer justify-start gap-3">
+                                    <input type="checkbox" class="checkbox checkbox-primary" id="aiSummarize" checked>
+                                    <span class="label-text">Auto-summarize long notes</span>
+                                </label>
+                            </div>
+                            <div class="form-control">
+                                <label class="label cursor-pointer justify-start gap-3">
+                                    <input type="checkbox" class="checkbox checkbox-primary" id="aiFormat" checked>
+                                    <span class="label-text">Auto-format notes</span>
+                                </label>
+                            </div>
+                            <div class="form-control">
+                                <label class="label cursor-pointer justify-start gap-3">
+                                    <input type="checkbox" class="checkbox checkbox-primary" id="aiSuggest">
+                                    <span class="label-text">Suggest related content</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-neutral-content py-8 mt-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h5 class="text-xl font-bold"><i class="fas fa-comments"></i> Silent Speak</h5>
+                    <p class="text-neutral-content/70">Notes and file storage system for accessible classroom communication.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p class="mt-2">
+                        <a href="../app.html" class="link link-hover">Back to Dashboard</a> |
+                        <a href="#" class="link link-hover" onclick="clearAllData()">Clear All Data</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/notes.js"></script>
+    <script>
+        // Add custom styling for notes
+        const style = document.createElement('style');
+        style.textContent = `
+            .note-editor {
+                min-height: 200px;
+                max-height: 400px;
+                overflow-y: auto;
+                border: 1px solid var(--fallback-bc, oklch(var(--bc)/0.2));
+                border-radius: var(--rounded-box, 1rem);
+                padding: 1rem;
+                background-color: var(--fallback-b1, oklch(var(--b1)));
+            }
+            .note-editor:focus {
+                border-color: var(--fallback-p, oklch(var(--p)));
+                box-shadow: 0 0 0 0.25rem var(--fallback-p, oklch(var(--p)/0.2));
+            }
+            .editor-toolbar {
+                border: 1px solid var(--fallback-bc, oklch(var(--bc)/0.2));
+                border-radius: var(--rounded-box, 1rem);
+                padding: 0.5rem;
+                background-color: var(--fallback-b2, oklch(var(--b2)));
+            }
+            .notes-list {
+                max-height: 500px;
+                overflow-y: auto;
+            }
+            .note-item {
+                border: 1px solid var(--fallback-bc, oklch(var(--bc)/0.2));
+                border-radius: var(--rounded-box, 1rem);
+                padding: 1rem;
+                margin-bottom: 0.5rem;
+                background-color: var(--fallback-b1, oklch(var(--b1)));
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .note-item:hover {
+                background-color: var(--fallback-b2, oklch(var(--b2)));
+                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .note-item.selected {
+                border-color: var(--fallback-p, oklch(var(--p)));
+                background-color: var(--fallback-p, oklch(var(--p)/0.1));
+            }
+            .file-item {
+                padding: 0.75rem;
+                border: 1px solid var(--fallback-bc, oklch(var(--bc)/0.2));
+                border-radius: var(--rounded-box, 1rem);
+                margin-bottom: 0.5rem;
+                background-color: var(--fallback-b1, oklch(var(--b1)));
+            }
+            .file-item:hover {
+                background-color: var(--fallback-b2, oklch(var(--b2)));
+            }
+            .tag {
+                display: inline-block;
+                background-color: var(--fallback-p, oklch(var(--p)/0.1));
+                color: var(--fallback-p, oklch(var(--p)));
+                padding: 0.25rem 0.75rem;
+                border-radius: 9999px;
+                font-size: 0.875rem;
+                margin-right: 0.25rem;
+                margin-bottom: 0.25rem;
+            }
+            .progress-bar {
+                transition: width 0.3s ease-in-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

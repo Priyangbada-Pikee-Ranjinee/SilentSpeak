@@ -322,3 +322,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
+// Update UI for authenticated user
+function updateUIForAuthenticatedUser(user) {
+    // Update user name in navbar
+    const userElements = document.querySelectorAll('.user-name, .user-email, .user-role');
+    userElements.forEach(element => {
+        if (element.classList.contains('user-name')) {
+            element.textContent = user.name;
+        }
+        if (element.classList.contains('user-email')) {
+            element.textContent = user.email;
+        }
+        if (element.classList.contains('user-role')) {
+            element.textContent = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+        }
+    });
+    
+
+    // Update avatar
+    const avatarElements = document.querySelectorAll('.user-avatar');
+    avatarElements.forEach(element => {
+        if (element.tagName === 'IMG') {
+            element.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=007bff&color=fff&size=100`;
+        }
+    });
+
+    
+    // Show/hide auth buttons
+    const authButtons = document.querySelectorAll('.auth-buttons');
+    authButtons.forEach(container => {
+        container.style.display = 'none';
+    });
+    
+    const userMenu = document.querySelectorAll('.user-menu');
+    userMenu.forEach(container => {
+        container.style.display = 'block';
+    });
+}
+
+// Export for use in other modules
+window.AuthSystem = AuthSystem;
+window.auth = auth;
+

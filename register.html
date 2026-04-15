@@ -470,6 +470,69 @@
             updateFormCompletion(); // Update completion when password changes
         });
 
+        // Form completion tracking
+        function updateFormCompletion() {
+            // List of required fields
+            const requiredFields = [
+                'firstName', 'lastName', 'email', 'password', 'confirmPassword'
+            ];
+            
+            // List of optional fields that contribute to completion
+            const optionalFields = [
+                'phone', 'institution', 'semester', 'disabilityDetails'
+            ];
+            
+            // Checkboxes and radio buttons
+            const roleSelected = document.querySelector('input[name="role"]:checked') !== null;
+            const termsChecked = document.getElementById('terms').checked;
+            
+            let completed = 0;
+            let total = requiredFields.length + optionalFields.length + 2; // +2 for role and terms
+            
+            // Check required fields
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value.trim() !== '') {
+                    completed++;
+                }
+            });
+            
+            // Check optional fields (weighted less)
+            optionalFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value.trim() !== '') {
+                    completed += 0.5; // Half weight for optional fields
+                }
+            });
+            
+            // Check role selection
+            if (roleSelected) completed++;
+            
+            // Check terms agreement (not required for completion calculation)
+            // if (termsChecked) completed += 0.5;
+            
+            // Calculate percentage (capped at 100%)
+            let percent = Math.min(Math.round((completed / total) * 100), 100);
+            
+            // Update progress bar
+            const progressBar = document.getElementById('formCompletion');
+            const percentText = document.getElementById('completionPercent');
+            
+            if (progressBar && percentText) {
+                progressBar.style.width = percent + '%';
+                percentText.textContent = percent + '%';
+                
+                // Change color based on completion
+                if (percent < 30) {
+                    progressBar.className = 'progress-bar bg-danger';
+                } else if (percent < 70) {
+                    progressBar.className = 'progress-bar bg-warning';
+                } else {
+                    progressBar.className = 'progress-bar bg-success';
+                }
+            }
+        }
+
     </script>
 
 </body>

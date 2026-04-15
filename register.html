@@ -46,5 +46,283 @@
         </div>
     </nav>
 
+    <!-- Registration Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h2 class="fw-bold">Create Your Silent Speak Account</h2>
+                                <p class="text-muted">Join thousands of students and teachers using our inclusive communication platform</p>
+                            </div>
+                            
+                            <!-- Form Completion Progress -->
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="text-muted">Form Completion</span>
+                                    <span id="completionPercent" class="fw-bold">0%</span>
+                                </div>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-primary" id="formCompletion" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <small class="text-muted">Fill in all required fields to complete registration</small>
+                            </div>
+                            
+                            <form id="registerForm">
+                                <!-- Personal Information -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">First Name *</label>
+                                        <input type="text" class="form-control" id="firstName" 
+                                               placeholder="Enter your first name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Last Name *</label>
+                                        <input type="text" class="form-control" id="lastName" 
+                                               placeholder="Enter your last name" required>
+                                    </div>
+                                </div>
+                                
+                                <!-- Contact Information -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email Address *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                            <input type="email" class="form-control" id="email" 
+                                                   placeholder="Enter your email" required>
+                                        </div>
+                                        <div class="form-text">We recommend using your institutional email</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                            <input type="tel" class="form-control" id="phone" 
+                                                   placeholder="Enter your phone number">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Password -->
+                                <div class="row mb-4">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="password" class="form-label">Password *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="password" 
+                                                   placeholder="Create a password" required>
+                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="password-strength mt-2">
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar" id="passwordStrength" role="progressbar" style="width: 0%"></div>
+                                            </div>
+                                            <small id="passwordFeedback" class="form-text"></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="confirmPassword" class="form-label">Confirm Password *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                            <input type="password" class="form-control" id="confirmPassword" 
+                                                   placeholder="Confirm your password" required>
+                                        </div>
+                                        <small id="passwordMatch" class="form-text"></small>
+                                    </div>
+                                </div>
+                                
+                                <!-- User Role -->
+                                <div class="mb-4">
+                                    <label class="form-label">I am a *</label>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check card p-3">
+                                                <input class="form-check-input" type="radio" name="role" id="roleStudent" value="student" checked>
+                                                <label class="form-check-label" for="roleStudent">
+                                                    <i class="fas fa-user-graduate fa-2x text-primary mb-2"></i><br>
+                                                    <strong>Student</strong><br>
+                                                    <small>I want to use the platform for learning</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check card p-3">
+                                                <input class="form-check-input" type="radio" name="role" id="roleTeacher" value="teacher">
+                                                <label class="form-check-label" for="roleTeacher">
+                                                    <i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i><br>
+                                                    <strong>Teacher</strong><br>
+                                                    <small>I want to create and manage sessions</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check card p-3">
+                                                <input class="form-check-input" type="radio" name="role" id="roleParent" value="parent">
+                                                <label class="form-check-label" for="roleParent">
+                                                    <i class="fas fa-users fa-2x text-info mb-2"></i><br>
+                                                    <strong>Parent/Guardian</strong><br>
+                                                    <small>I want to monitor my child's progress</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Disability Information -->
+                                <div class="mb-4">
+                                    <label class="form-label">Disability Information (Optional)</label>
+                                    <p class="text-muted small">This helps us customize the experience for your needs</p>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="disabilityHearing">
+                                                <label class="form-check-label" for="disabilityHearing">
+                                                    <i class="fas fa-deaf text-primary"></i> Hearing Impairment
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="disabilitySpeech">
+                                                <label class="form-check-label" for="disabilitySpeech">
+                                                    <i class="fas fa-comment-slash text-primary"></i> Speech Impairment
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="disabilityDyslexia">
+                                                <label class="form-check-label" for="disabilityDyslexia">
+                                                    <i class="fas fa-book-reader text-primary"></i> Dyslexia
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="disabilityColorBlind">
+                                                <label class="form-check-label" for="disabilityColorBlind">
+                                                    <i class="fas fa-palette text-primary"></i> Color Blindness
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="disabilityMobility">
+                                                <label class="form-check-label" for="disabilityMobility">
+                                                    <i class="fas fa-wheelchair text-primary"></i> Mobility Impairment
+                                                </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="checkbox" id="disabilityNone">
+                                                <label class="form-check-label" for="disabilityNone">
+                                                    <i class="fas fa-check text-primary"></i> None
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <label for="disabilityDetails" class="form-label">Additional Details (Optional)</label>
+                                        <textarea class="form-control" id="disabilityDetails" rows="2" 
+                                                  placeholder="Any additional information about your accessibility needs"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <!-- Educational Information -->
+                                <div class="mb-4" id="studentInfo">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="institution" class="form-label">Institution/School *</label>
+                                            <input type="text" class="form-control" id="institution" 
+                                                   placeholder="Enter your school/college name">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="semester" class="form-label">Semester/Class</label>
+                                            <select class="form-select" id="semester">
+                                                <option value="">Select semester/class</option>
+                                                <option value="1">Semester 1 / Class 1</option>
+                                                <option value="2">Semester 2 / Class 2</option>
+                                                <option value="3">Semester 3 / Class 3</option>
+                                                <option value="4">Semester 4 / Class 4</option>
+                                                <option value="5">Semester 5 / Class 5</option>
+                                                <option value="6">Semester 6 / Class 6</option>
+                                                <option value="7">Semester 7 / Class 7</option>
+                                                <option value="8">Semester 8 / Class 8</option>
+                                                <option value="9">Semester 9 / Class 9</option>
+                                                <option value="10">Semester 10 / Class 10</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Terms and Conditions -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="terms" required>
+                                        <label class="form-check-label" for="terms">
+                                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a> *
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            I want to receive updates about new features and educational resources
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Submit Button -->
+                                <div class="d-grid gap-2 mb-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-user-plus"></i> Create Account
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary btn-lg demo-login">
+                                        <i class="fas fa-user-check"></i> Use Demo Account Instead
+                                    </button>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <p>Already have an account? <a href="login.html" class="fw-bold">Login here</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Info -->
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                                    <h5>Secure & Private</h5>
+                                    <p class="small">Your data is encrypted and protected</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-universal-access fa-3x text-success mb-3"></i>
+                                    <h5>Accessibility First</h5>
+                                    <p class="small">Designed for diverse needs</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-graduation-cap fa-3x text-info mb-3"></i>
+                                    <h5>Academic Project</h5>
+                                    <p class="small">Part of Design Project-2 initiative</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
 </body>
 </html>

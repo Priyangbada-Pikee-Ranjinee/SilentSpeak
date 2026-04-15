@@ -256,3 +256,69 @@ class AuthSystem {
     }
 
 }
+
+// Create global auth instance
+const auth = new AuthSystem();
+
+// Demo data initialization
+function initializeDemoData() {
+    // Check if demo data already exists
+    if (!localStorage.getItem('silentSpeakDemoInitialized')) {
+        const demoUsers = [
+            {
+                id: 1,
+                email: 'teacher@example.com',
+                password: auth.hashPassword('Teacher123'),
+                name: 'Sarah Johnson',
+                role: 'teacher',
+                disabilities: [],
+                institution: 'University of Dhaka',
+                semester: '',
+                createdAt: '2023-01-15T10:30:00Z',
+                lastLogin: null,
+                settings: { fontSize: 'normal', theme: 'light', colorBlindMode: false, language: 'en' }
+            },
+            {
+                id: 2,
+                email: 'student@example.com',
+                password: auth.hashPassword('Student123'),
+                name: 'Ahmed Rahman',
+                role: 'student',
+                disabilities: ['hearing'],
+                institution: 'University of Dhaka',
+                semester: '5',
+                createdAt: '2023-02-20T14:45:00Z',
+                lastLogin: null,
+                settings: { fontSize: 'large', theme: 'colorblind', colorBlindMode: true, language: 'bn' }
+            },
+            {
+                id: 3,
+                email: 'parent@example.com',
+                password: auth.hashPassword('Parent123'),
+                name: 'Fatima Begum',
+                role: 'parent',
+                disabilities: [],
+                institution: '',
+                semester: '',
+                createdAt: '2023-03-10T09:15:00Z',
+                lastLogin: null,
+                settings: { fontSize: 'normal', theme: 'light', colorBlindMode: false, language: 'en' }
+            }
+        ];
+        
+        localStorage.setItem('silentSpeakUsers', JSON.stringify(demoUsers));
+        localStorage.setItem('silentSpeakDemoInitialized', 'true');
+    }
+}
+
+// Initialize demo data on page load
+document.addEventListener('DOMContentLoaded', function() {
+    initializeDemoData();
+    
+    // Check auth status and update UI
+    const currentUser = auth.getCurrentUser();
+    if (currentUser) {
+        updateUIForAuthenticatedUser(currentUser);
+    }
+});
+

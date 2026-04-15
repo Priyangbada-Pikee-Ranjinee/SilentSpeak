@@ -533,6 +533,77 @@
             }
         }
 
+        // Attach event listeners to all form fields
+        const formFields = document.querySelectorAll('#registerForm input, #registerForm select, #registerForm textarea');
+        formFields.forEach(field => {
+            field.addEventListener('input', updateFormCompletion);
+            field.addEventListener('change', updateFormCompletion);
+        });
+        
+        // Initial update
+        updateFormCompletion();
+        
+        // Handle form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const role = document.querySelector('input[name="role"]:checked').value;
+            
+            // Validation
+            if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                window.SilentSpeak.showToast('Please fill in all required fields', 'danger');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                window.SilentSpeak.showToast('Passwords do not match', 'danger');
+                return;
+            }
+            
+            if (!document.getElementById('terms').checked) {
+                window.SilentSpeak.showToast('You must agree to the terms and conditions', 'warning');
+                return;
+            }
+            
+            // Collect disability information
+            const disabilities = [];
+            if (document.getElementById('disabilityHearing').checked) disabilities.push('hearing');
+            if (document.getElementById('disabilitySpeech').checked) disabilities.push('speech');
+            if (document.getElementById('disabilityDyslexia').checked) disabilities.push('dyslexia');
+            if (document.getElementById('disabilityColorBlind').checked) disabilities.push('colorblind');
+            if (document.getElementById('disabilityMobility').checked) disabilities.push('mobility');
+            if (document.getElementById('disabilityNone').checked) disabilities.push('none');
+            
+            // Create user object
+            const user = {
+                id: Date.now(),
+                name: `${firstName} ${lastName}`,
+                email: email,
+                role: role,
+                disabilities: disabilities,
+                institution: document.getElementById('institution').value || 'Not specified',
+                semester: document.getElementById('semester').value || 'Not specified',
+                createdAt: new Date().toISOString()
+            };
+            
+            // Save to localStorage (demo)
+            localStorage.setItem('silentSpeakUser', JSON.stringify(user));
+            
+            // Show success message
+            window.SilentSpeak.showToast('Account created successfully!', 'success');
+            
+            // Redirect to app after 2 seconds
+            setTimeout(() => {
+                window.location.href = '../app.html';
+            }, 2000);
+        });
+
     </script>
 
 </body>

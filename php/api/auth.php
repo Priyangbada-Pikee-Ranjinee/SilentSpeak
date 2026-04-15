@@ -206,4 +206,207 @@ function registerUser() {
         ], 'Registration successful (demo mode)');
     }
 }
+
+/**
+ * Login user
+ */
+function loginUser() {
+    // Get JSON input
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    if (!$input) {
+        sendError('Invalid JSON input', 400);
+    }
+    
+    // Validate required fields
+    $required = ['email', 'password'];
+    $error = validateRequired($input, $required);
+    
+    if ($error) {
+        sendError($error, 400);
+    }
+    
+    // Sanitize input
+    $email = sanitizeInput($input['email']);
+    $password = $input['password'];
+    
+    $conn = getDatabaseConnection();
+    
+    if ($conn) {
+        // Get user from database
+        $stmt = $conn->prepare("
+            SELECT id, email, password_hash, first_name, last_name, role, 
+                   is_active, is_verified, settings
+            FROM users 
+            WHERE email = ?
+        ");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            sendError('Invalid email or password', 401);
+        }
+        
+        $user = $result->fetch_assoc();
+        
+        // Verify password
+        if (!verifyPassword($password, $user['password_hash'])) {
+            sendError('Invalid email or password', 401);
+        }
+        
+        // Check if user is active
+        if (!$user['is_active']) {
+            sendError('Account is deactivated', 403);
+        }
+        
+        // Generate JWT token
+        $token = generateJWT([
+            'userId' => $user['id'],
+            'email' => $user['email'],
+            'role' => $user['role']
+        ]);
+        
+        // Log activity
+        logActivity($user['id'], 'User Login', 'User logged in successfully');
+        
+        // Update last login (you would add a last_login field to users table)
+        
+        sendSuccess([
+            'token' => $token,
+            'user' => [
+                'id' => $user['id'],
+                'email' => $user['email'],
+                'firstName' => $user['first_name'],
+                'lastName' => $user['last_name'],
+                'role' => $user['role'],
+                'isVerified' => (bool)$user['is_verified'],
+                'settings' => json_decode($user['settings'], true)
+            ]
+        ], 'Login successful');
+        
+        $stmt->close();
+    } else {
+        // Demo mode - simulate login
+        // For demo, accept any password for demo@example.com
+        if ($email === 'demo@example.com') {
+            $token = generateJWT([
+                'userId' => 1,
+                'email' => $email,
+                'role' => 'student'
+            ]);
+            
+            sendSuccess([
+                'token' => $token,
+                'user' => [
+                    'id' => 1,
+                    'email' => $email,
+                    'firstName' => 'Demo',
+                    'lastName' => 'User',
+                    'role' => 'student',
+                    'isVerified' => true,
+                    'settings' => [
+                        'accessibility' => [
+                            'fontSize' => 'medium',
+                            'colorTheme' => 'default',
+                            'highContrast' => false
+                        ]
+                    ]
+                ]
+            ], 'Login successful (demo mode)');
+        } else {
+            sendError('Invalid email or password', 401);
+        }
+    }
+}
+
+/**
+ * Logout user
+ */
+function logoutUser() {
+    $payload = requireAuth();
+    
+    // In a real app, you might add the token to a blacklist
+    // For now, we'll just log the activity
+    
+    logActivity($payload['userId'], 'User Logout', 'User logged out');
+    
+    sendSuccess([], 'Logout successful');
+}
+
+/**
+ * Refresh JWT token
+ */
+function refreshToken() {
+    $payload = requireAuth();
+    
+    // Generate new token with same payload but new expiration
+    $newToken = generateJWT([
+        'userId' => $payload['userId'],
+        'email' => $payload['email'],
+        'role' => $payload['role']
+    ]);
+    
+    sendSuccess([
+        'token' => $newToken
+    ], 'Token refreshed');
+}
+
+/**
+ * Forgot password
+ */
+function forgotPassword() {
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    if (!$input || !isset($input['email'])) {
+        sendError('Email is required', 400);
+    }
+    
+    $email = sanitizeInput($input['email']);
+    
+    // In a real app, you would:
+    // 1. Check if email exists
+    // 2. Generate reset token
+    // 3. Send email with reset link
+    // 4. Store reset token in database with expiration
+    
+    // For demo, just return success
+    sendSuccess([], 'If an account exists with this email, a password reset link has been sent');
+}
+
+/**
+ * Reset password
+ */
+function resetPassword() {
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    if (!$input) {
+        sendError('Invalid JSON input', 400);
+    }
+    
+    $required = ['token', 'newPassword'];
+    $error = validateRequired($input, $required);
+    
+    if ($error) {
+        sendError($error, 400);
+    }
+    
+    $token = sanitizeInput($input['token']);
+    $newPassword = $input['newPassword'];
+    
+    // Validate password strength
+    if (strlen($newPassword) < 8) {
+        sendError('Password must be at least 8 characters long', 400);
+    }
+    
+    // In a real app, you would:
+    // 1. Verify reset token from database
+    // 2. Check if token is expired
+    // 3. Update user's password
+    // 4. Invalidate all existing sessions
+    
+    // For demo, just return success
+    sendSuccess([], 'Password reset successful');
+}
+
 ?>

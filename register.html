@@ -604,6 +604,24 @@
             }, 2000);
         });
 
+        // Demo login button
+        document.querySelector('.demo-login').addEventListener('click', function() {
+            window.SilentSpeak.demoLogin();
+        });
+        
+        // Show/hide student info based on role
+        document.querySelectorAll('input[name="role"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const studentInfo = document.getElementById('studentInfo');
+                if (this.value === 'student') {
+                    studentInfo.style.display = 'block';
+                } else {
+                    studentInfo.style.display = 'none';
+                }
+            });
+        });
+        
+
     </script>
 
 </body>

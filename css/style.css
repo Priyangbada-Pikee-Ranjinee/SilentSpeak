@@ -26,3 +26,18 @@
     --font-xlarge: 1.5rem;
     --font-xxlarge: 2rem;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+        url("../images/background\ images.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+}

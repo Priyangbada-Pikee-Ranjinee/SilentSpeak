@@ -1,0 +1,76 @@
+/* Silent Speak - Responsive Stylesheet */
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575.98px) {
+    body {
+        padding-top: 70px;
+    }
+    
+    .hero-section {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .display-6 {
+        font-size: 1.75rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+    
+    .btn-lg {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+    
+    .feature-icon-large {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .feature-icon-large i {
+        font-size: 2.5rem;
+    }
+    
+    .pomodoro-timer {
+        font-size: 3rem;
+    }
+    
+    .caption-box {
+        height: 200px;
+    }
+    
+    .quick-button {
+        min-height: 60px;
+        font-size: 1rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.25rem;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+}

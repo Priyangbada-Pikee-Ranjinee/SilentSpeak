@@ -234,4 +234,147 @@ function requireAuth() {
     return $payload;
 }
 
+
+// Initialize database tables (for demo/development)
+function initializeDatabase() {
+    $conn = getDatabaseConnection();
+    
+    if (!$conn) {
+        return false;
+    }
+    
+    $sql = "
+    CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        first_name VARCHAR(100) NOT NULL,
+        last_name VARCHAR(100) NOT NULL,
+        phone VARCHAR(20),
+        date_of_birth DATE,
+        gender ENUM('male', 'female', 'other', 'prefer-not-to-say') DEFAULT 'prefer-not-to-say',
+        role ENUM('student', 'teacher', 'parent', 'administrator') DEFAULT 'student',
+        institution VARCHAR(255),
+        department VARCHAR(255),
+        semester VARCHAR(50),
+        bio TEXT,
+        disabilities JSON,
+        settings JSON,
+        profile_image VARCHAR(500),
+        is_active BOOLEAN DEFAULT TRUE,
+        is_verified BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+    
+    CREATE TABLE IF NOT EXISTS sessions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        session_code VARCHAR(20) UNIQUE NOT NULL,
+        teacher_id INT NOT NULL,
+        subject VARCHAR(255),
+        language VARCHAR(50) DEFAULT 'en',
+        is_active BOOLEAN DEFAULT TRUE,
+        start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        end_time TIMESTAMP NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    
+    CREATE TABLE IF NOT EXISTS session_participants (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        session_id INT NOT NULL,
+        student_id INT NOT NULL,
+        joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        left_at TIMESTAMP NULL,
+        FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE,
+        FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+        UNIQUE KEY unique_participant (session_id, student_id)
+    );
+    
+    CREATE TABLE IF NOT EXISTS captions (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        session_id INT NOT NULL,
+        speaker_id INT NOT NULL,
+        text TEXT NOT NULL,
+        language VARCHAR(50) DEFAULT 'en',
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE,
+        FOREIGN KEY (speaker_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    
+    CREATE TABLE IF NOT EXISTS notes (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        content TEXT NOT NULL,
+        category VARCHAR(100),
+        tags JSON,
+        is_public BOOLEAN DEFAULT FALSE,
+        file_path VARCHAR(500),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    
+    CREATE TABLE IF NOT EXISTS tasks (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        title VARCHAR(255) NOT NULL,
+        description TEXT,
+        priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
+        status ENUM('pending', 'in-progress', 'completed', 'cancelled') DEFAULT 'pending',
+        due_date DATE,
+        pomodoro_sessions INT DEFAULT 0,
+        completed_sessions INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    
+    CREATE TABLE IF NOT EXISTS quick_phrases (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        category VARCHAR(100) NOT NULL,
+        text TEXT NOT NULL,
+        translation JSON,
+        usage_count INT DEFAULT 0,
+        is_favorite BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    
+    CREATE TABLE IF NOT EXISTS activity_logs (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        activity_type VARCHAR(100) NOT NULL,
+        details TEXT,
+        device_info VARCHAR(255),
+        ip_address VARCHAR(45),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );
+    ";
+    
+    try {
+        // Execute multi-query
+        if ($conn->multi_query($sql)) {
+            do {
+                if ($result = $conn->store_result()) {
+                    $result->free();
+                }
+            } while ($conn->more_results() && $conn->next_result());
+        }
+        
+        return true;
+    } catch (Exception $e) {
+        error_log("Database initialization error: " . $e->getMessage());
+        return false;
+    }
+}
+
+// Auto-initialize database on first run (for demo)
+if (!isset($_SESSION['db_initialized'])) {
+    initializeDatabase();
+    $_SESSION['db_initialized'] = true;
+}
 ?>

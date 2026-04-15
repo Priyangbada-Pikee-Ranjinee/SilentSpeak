@@ -150,4 +150,32 @@ class AuthSystem {
         return { success: true, message: 'Profile updated successfully' };
     }
 
+    
+    // Change password
+    changePassword(userId, currentPassword, newPassword) {
+        const user = this.users.find(u => u.id === userId);
+        if (!user) {
+            return { success: false, message: 'User not found' };
+        }
+        
+        // Verify current password
+        if (this.hashPassword(currentPassword) !== user.password) {
+            return { success: false, message: 'Current password is incorrect' };
+        }
+        
+        // Validate new password
+        const passwordValidation = this.validatePassword(newPassword);
+        if (!passwordValidation.isValid) {
+            return { 
+                success: false, 
+                message: 'New password must be at least 8 characters with uppercase, lowercase, and numbers' 
+            };
+        }
+        // Update password
+        user.password = this.hashPassword(newPassword);
+        this.saveUsers();
+        
+        return { success: true, message: 'Password changed successfully' };
+    }
+
 }

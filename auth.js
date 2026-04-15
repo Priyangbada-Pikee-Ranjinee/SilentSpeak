@@ -130,4 +130,24 @@ class AuthSystem {
         return this.isAuthenticated || !!localStorage.getItem('silentSpeakCurrentUser');
     }
 
+    // Update user profile
+    updateProfile(userId, updates) {
+        const userIndex = this.users.findIndex(u => u.id === userId);
+        if (userIndex === -1) {
+            return { success: false, message: 'User not found' };
+        }
+        
+        // Update user data
+        this.users[userIndex] = { ...this.users[userIndex], ...updates };
+        this.saveUsers();
+        
+        // Update current user if it's the same user
+        if (this.currentUser && this.currentUser.id === userId) {
+            this.currentUser = { ...this.currentUser, ...updates };
+            localStorage.setItem('silentSpeakCurrentUser', JSON.stringify(this.currentUser));
+        }
+        
+        return { success: true, message: 'Profile updated successfully' };
+    }
+
 }

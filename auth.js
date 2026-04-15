@@ -104,4 +104,30 @@ class AuthSystem {
             user: this.currentUser
         };
     }
+
+    // Logout user
+    logout() {
+        this.currentUser = null;
+        this.isAuthenticated = false;
+        localStorage.removeItem('silentSpeakCurrentUser');
+        return { success: true, message: 'Logged out successfully' };
+    }
+    
+    // Get current user
+    getCurrentUser() {
+        if (!this.currentUser) {
+            const savedUser = localStorage.getItem('silentSpeakCurrentUser');
+            if (savedUser) {
+                this.currentUser = JSON.parse(savedUser);
+                this.isAuthenticated = true;
+            }
+        }
+        return this.currentUser;
+    }
+    
+    // Check if user is authenticated
+    checkAuth() {
+        return this.isAuthenticated || !!localStorage.getItem('silentSpeakCurrentUser');
+    }
+
 }

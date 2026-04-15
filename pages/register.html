@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Silent Speak</title>
+    <!-- Tailwind CSS + DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/tailwind.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        /* Fix for input fields not accepting input */
+        .input, select, textarea, input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+            pointer-events: auto !important;
+            user-select: auto !important;
+            -webkit-user-select: auto !important;
+        }
+        /* Ensure no overlaying elements block inputs */
+        .input:disabled, .input[readonly] {
+            background-color: #e9ecef !important;
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body class="font-sans"> 
+    <!-- Navigation -->
+    <nav class="navbar bg-primary text-primary-content shadow-lg">
+        <div class="container mx-auto">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="../index.html">
+                    <i class="fas fa-comments mr-2"></i> Silent Speak
+                </a>
+            </div>
+            <div class="flex-none">
+                <div class="dropdown dropdown-end lg:hidden relative z-50">
+                    <label tabindex="0" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                        </svg>
+                    </label>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow z-[9999] absolute text-base-content">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#features">Features</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li><a href="login.html" class="btn btn-sm btn-light mt-2">Login</a></li>
+                    </ul>
+                </div>
+                <div class="hidden lg:flex">
+                    <ul class="menu menu-horizontal px-1">
+                        <li><a href="../index.html" class="text-white hover:bg-primary-focus">Home</a></li>
+                        <li><a href="../index.html#features" class="text-white hover:bg-primary-focus">Features</a></li>
+                        <li><a href="../index.html#about" class="text-white hover:bg-primary-focus">About</a></li>
+                        <li><a href="login.html" class="btn btn-light ml-2">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Section -->
+    <section class="py-10 bg-base-200">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="card shadow-2xl border-0">
+                    <div class="card-body p-8">
+                        <div class="text-center mb-8">
+                            <h2 class="text-3xl font-bold mb-2">Create Your Silent Speak Account</h2>
+                            <p class="text-gray-600">Join thousands of students and teachers using our inclusive communication platform</p>
+                        </div>
+                        
+                        <!-- Form Completion Progress -->
+                        <div class="mb-8">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">Form Completion</span>
+                                <span id="completionPercent" class="font-bold">0%</span>
+                            </div>
+                            <progress class="progress progress-primary w-full h-3" id="formCompletion" value="0" max="100"></progress>
+                            <small class="text-gray-500">Fill in all required fields to complete registration</small>
+                        </div>
+                        
+                        <form id="registerForm">
+                            <!-- Personal Information -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div class="form-control">
+                                    <label class="label" for="firstName">
+                                        <span class="label-text font-semibold">First Name *</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full" id="firstName" 
+                                           placeholder="Enter your first name" required>
+                                </div>
+                                <div class="form-control">
+                                    <label class="label" for="lastName">
+                                        <span class="label-text font-semibold">Last Name *</span>
+                                    </label>
+                                    <input type="text" class="input input-bordered w-full" id="lastName" 
+                                           placeholder="Enter your last name" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Contact Information -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div class="form-control">
+                                    <label class="label" for="email">
+                                        <span class="label-text font-semibold">Email Address *</span>
+                                    </label>
+                                    <div class="input input-bordered flex items-center gap-2">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                        <input type="email" class="grow" id="email" 
+                                               placeholder="Enter your email" required>
+                                    </div>
+                                    <label class="label">
+                                        <span class="label-text-alt">We recommend using your institutional email</span>
+                                    </label>
+                                </div>
+                                <div class="form-control">
+                                    <label class="label" for="phone">
+                                        <span class="label-text font-semibold">Phone Number</span>
+                                    </label>
+                                    <div class="input input-bordered flex items-center gap-2">
+                                        <i class="fas fa-phone text-gray-400"></i>
+                                        <input type="tel" class="grow" id="phone" 
+                                               placeholder="Enter your phone number">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Password -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div class="form-control">
+                                    <label class="label" for="password">
+                                        <span class="label-text font-semibold">Password *</span>
+                                    </label>
+                                    <div class="input input-bordered flex items-center gap-2">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                        <input type="password" class="grow" id="password" 
+                                               placeholder="Create a password" required>
+                                        <button class="btn btn-ghost btn-sm" type="button" id="togglePassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div class="mt-3">
+                                        <progress class="progress w-full h-2" id="passwordStrength" value="0" max="100"></progress>
+                                        <small id="passwordFeedback" class="text-sm"></small>
+                                    </div>
+                                </div>
+                                <div class="form-control">
+                                    <label class="label" for="confirmPassword">
+                                        <span class="label-text font-semibold">Confirm Password *</span>
+                                    </label>
+                                    <div class="input input-bordered flex items-center gap-2">
+                                        <i class="fas fa-lock text-gray-400"></i>
+                                        <input type="password" class="grow" id="confirmPassword" 
+                                               placeholder="Confirm your password" required>
+                                    </div>
+                                    <small id="passwordMatch" class="text-sm"></small>
+                                </div>
+                            </div>
+                            
+                            <!-- User Role -->
+                            <div class="mb-8">
+                                <label class="label">
+                                    <span class="label-text font-semibold">I am a *</span>
+                                </label>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer justify-start gap-3 p-4 border rounded-lg hover:border-primary hover:bg-base-100" for="roleStudent">
+                                            <input class="radio radio-primary" type="radio" name="role" id="roleStudent" value="student" checked>
+                                            <div class="text-center">
+                                                <i class="fas fa-user-graduate fa-3x text-primary mb-2"></i><br>
+                                                <strong class="block">Student</strong>
+                                                <small class="text-gray-500">I want to use the platform for learning</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer justify-start gap-3 p-4 border rounded-lg hover:border-primary hover:bg-base-100" for="roleTeacher">
+                                            <input class="radio radio-primary" type="radio" name="role" id="roleTeacher" value="teacher">
+                                            <div class="text-center">
+                                                <i class="fas fa-chalkboard-teacher fa-3x text-success mb-2"></i><br>
+                                                <strong class="block">Teacher</strong>
+                                                <small class="text-gray-500">I want to create and manage sessions</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label cursor-pointer justify-start gap-3 p-4 border rounded-lg hover:border-primary hover:bg-base-100" for="roleParent">
+                                            <input class="radio radio-primary" type="radio" name="role" id="roleParent" value="parent">
+                                            <div class="text-center">
+                                                <i class="fas fa-users fa-3x text-info mb-2"></i><br>
+                                                <strong class="block">Parent/Guardian</strong>
+                                                <small class="text-gray-500">I want to monitor my child's progress</small>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Disability Information -->
+                            <div class="mb-8">
+                                <label class="label">
+                                    <span class="label-text font-semibold">Disability Information (Optional)</span>
+                                </label>
+                                <p class="text-gray-500 text-sm mb-4">This helps us customize the experience for your needs</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-3">
+                                        <label class="label cursor-pointer justify-start gap-3">
+                                            <input type="checkbox" class="checkbox checkbox-primary" id="disabilityHearing">
+                                            <span class="label-text"><i class="fas fa-deaf text-primary mr-2"></i>Hearing Impairment</span>
+                                        </label>
+                                        <label class="label cursor-pointer justify-start gap-3">
+                                            <input type="checkbox" class="checkbox checkbox-primary" id="disabilitySpeech">
+                                            <span class="label-text"><i class="fas fa-comment-slash text-primary mr-2"></i>Speech Impairment</span>
+                                        </label>
+                                        <label class="label cursor-pointer justify-start gap-3">
+                                            <input type="checkbox" class="checkbox checkbox-primary" id="disabilityColor">
+                                            <span class="label-text"><i class="fas fa-palette text-primary mr-2"></i>Color Blindness</span>
+                                        </label>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <label class="label cursor-pointer justify-start gap-3">
+                                            <input type="checkbox" class="checkbox checkbox-primary" id="disabilityDyslexia">
+                                            <span class="label-text"><i class="fas fa-book-reader text-primary mr-2"></i>Dyslexia</span>
+                                        </label>
+                                        <label class="label cursor-pointer justify-start gap-3">
+                                            <input type="checkbox" class="checkbox checkbox-primary" id="disabilityMobility">
+                                            <span class="label-text"><i class="fas fa-wheelchair text-primary mr-2"></i>Mobility Impairment</span>
+                                        </label>
+                                        <label class="label cursor-pointer justify-start gap-3">
+                                            <input type="checkbox" class="checkbox checkbox-primary" id="disabilityOther">
+                                            <span class="label-text"><i class="fas fa-universal-access text-primary mr-2"></i>Other Disability</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Institution Information -->
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold mb-4">Institution Information</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="form-control">
+                                        <label class="label" for="institution">
+                                            <span class="label-text font-semibold">Institution/School *</span>
+                                        </label>
+                                        <input type="text" class="input input-bordered w-full" id="institution" 
+                                               placeholder="Enter your institution name" required>
+                                    </div>
+                                    <div class="form-control">
+                                        <label class="label" for="semester">
+                                            <span class="label-text font-semibold">Semester/Class</span>
+                                        </label>
+                                        <select class="select select-bordered w-full" id="semester">
+                                            <option value="">Select semester/class</option>
+                                            <option value="1">Semester 1</option>
+                                            <option value="2">Semester 2</option>
+                                            <option value="3">Semester 3</option>
+                                            <option value="4">Semester 4</option>
+                                            <option value="5">Semester 5</option>
+                                            <option value="6">Semester 6</option>
+                                            <option value="7">Semester 7</option>
+                                            <option value="8">Semester 8</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Terms and Conditions -->
+                            <div class="mb-8">
+                                <div class="form-control">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="checkbox checkbox-primary" id="terms" required>
+                                        <span class="label-text">
+                                            I agree to the <a href="#" class="link link-primary">Terms of Service</a> and <a href="#" class="link link-primary">Privacy Policy</a> *
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-control mt-4">
+                                    <label class="label cursor-pointer justify-start gap-3">
+                                        <input type="checkbox" class="checkbox checkbox-primary" id="newsletter">
+                                        <span class="label-text">
+                                            I want to receive updates about new features and educational resources
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Submit Button -->
+                            <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                                <button type="submit" class="btn btn-primary btn-lg flex-1">
+                                    <i class="fas fa-user-plus mr-2"></i> Create Account
+                                </button>
+                                <button type="button" class="btn btn-outline btn-primary btn-lg flex-1" id="demoRegister">
+                                    <i class="fas fa-user-check mr-2"></i> Try Demo Account
+                                </button>
+                            </div>
+                            
+                            <div class="text-center">
+                                <p>Already have an account? <a href="login.html" class="link link-primary font-bold">Login here</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Info Section -->
+                <div class="card mt-8 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl font-bold mb-4"><i class="fas fa-info-circle mr-2"></i> Why Register?</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div class="text-center">
+                                <div class="feature-icon mb-4">
+                                    <i class="fas fa-comments fa-3x text-primary"></i>
+                                </div>
+                                <h4 class="font-bold mb-2">Inclusive Communication</h4>
+                                <p class="text-sm text-gray-600">Break communication barriers with real-time captioning and text-to-speech.</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="feature-icon mb-4">
+                                    <i class="fas fa-graduation-cap fa-3x text-success"></i>
+                                </div>
+                                <h4 class="font-bold mb-2">Academic Focus</h4>
+                                <p class="text-sm text-gray-600">Designed specifically for classroom environments and educational needs.</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="feature-icon mb-4">
+                                    <i class="fas fa-mobile-alt fa-3x text-info"></i>
+                                </div>
+                                <h4 class="font-bold mb-2">Mobile Friendly</h4>
+                                <p class="text-sm text-gray-600">Works seamlessly on mobile devices with responsive design.</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="feature-icon mb-4">
+                                    <i class="fas fa-shield-alt fa-3x text-warning"></i>
+                                </div>
+                                <h4 class="font-bold mb-2">Secure & Private</h4>
+                                <p class="text-sm text-gray-600">Your data is encrypted and we comply with educational privacy standards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral text-neutral-content py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h5 class="text-xl font-bold"><i class="fas fa-comments mr-2"></i> Silent Speak</h5>
+                    <p>Communication aid for students with disabilities.</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p>Academic Design Project-2 | <a href="../index.html" class="link">Back to Home</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Safe toast function with fallback
+            function safeToast(message, type = 'info') {
+                if (window.SilentSpeak && window.SilentSpeak.showToast) {
+                    window.SilentSpeak.showToast(message, type);
+                } else {
+                    // Fallback to alert if main.js not loaded
+                    alert(message);
+                    console.log(`Toast (${type}): ${message}`);
+                }
+            }
+            
+            // Form completion tracking
+            const form = document.getElementById('registerForm');
+            const completionBar = document.getElementById('formCompletion');
+            const completionPercent = document.getElementById('completionPercent');
+            
+            if (form) {
+                const requiredFields = form.querySelectorAll('[required]');
+                const totalRequired = requiredFields.length;
+                
+                function updateCompletion() {
+                    let filled = 0;
+                    requiredFields.forEach(field => {
+                        if (field.type === 'checkbox' || field.type === 'radio') {
+                            if (field.checked) filled++;
+                        } else if (field.value.trim() !== '') {
+                            filled++;
+                        }
+                    });
+                    
+                    const percent = totalRequired > 0 ? Math.round((filled / totalRequired) * 100) : 0;
+                    completionBar.value = percent;
+                    completionPercent.textContent = `${percent}%`;
+                }
+                
+                // Add event listeners to all required fields
+                requiredFields.forEach(field => {
+                    field.addEventListener('input', updateCompletion);
+                    field.addEventListener('change', updateCompletion);
+                });
+                
+                // Initialize
+                updateCompletion();
+            }
+            
+            // Toggle password visibility
+            const togglePasswordBtn = document.getElementById('togglePassword');
+            if (togglePasswordBtn) {
+                togglePasswordBtn.addEventListener('click', function() {
+                    const passwordInput = document.getElementById('password');
+                    const icon = this.querySelector('i');
+                    
+                    if (passwordInput && icon) {
+                        if (passwordInput.type === 'password') {
+                            passwordInput.type = 'text';
+                            icon.classList.remove('fa-eye');
+                            icon.classList.add('fa-eye-slash');
+                        } else {
+                            passwordInput.type = 'password';
+                            icon.classList.remove('fa-eye-slash');
+                            icon.classList.add('fa-eye');
+                        }
+                    }
+                });
+            }
+            
+            // Demo registration
+            const demoRegisterBtn = document.getElementById('demoRegister');
+            if (demoRegisterBtn) {
+                demoRegisterBtn.addEventListener('click', function() {
+                    safeToast('Demo account created! Redirecting to dashboard...', 'success');
+                    // Simulate demo user creation
+                    const demoUser = {
+                        id: Date.now(),
+                        name: 'Demo User',
+                        email: 'demo@example.com',
+                        role: 'student',
+                        disabilities: ['hearing'],
+                        institution: 'Demo University',
+                        semester: '5',
+                        createdAt: new Date().toISOString()
+                    };
+                    localStorage.setItem('silentSpeakUser', JSON.stringify(demoUser));
+                    
+                    setTimeout(() => {
+                        window.location.href = '../app.html';
+                    }, 1500);
+                });
+            }
+            
+            // Password strength indicator
+            const passwordInput = document.getElementById('password');
+            const passwordStrengthBar = document.getElementById('passwordStrength');
+            const passwordFeedback = document.getElementById('passwordFeedback');
+            
+            if (passwordInput && passwordStrengthBar) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    let strength = 0;
+                    let feedback = '';
+                    
+                    if (password.length >= 8) strength += 25;
+                    if (/[A-Z]/.test(password)) strength += 25;
+                    if (/[0-9]/.test(password)) strength += 25;
+                    if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+                    
+                    passwordStrengthBar.value = strength;
+                    
+                    if (strength < 25) {
+                        feedback = 'Very weak';
+                        passwordStrengthBar.className = 'progress progress-error w-full h-2';
+                    } else if (strength < 50) {
+                        feedback = 'Weak';
+                        passwordStrengthBar.className = 'progress progress-warning w-full h-2';
+                    } else if (strength < 75) {
+                        feedback = 'Good';
+                        passwordStrengthBar.className = 'progress progress-info w-full h-2';
+                    } else {
+                        feedback = 'Strong';
+                        passwordStrengthBar.className = 'progress progress-success w-full h-2';
+                    }
+                    
+                    passwordFeedback.textContent = feedback;
+                });
+            }
+            
+            // Password match validation
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const passwordMatchText = document.getElementById('passwordMatch');
+            
+            if (confirmPasswordInput && passwordMatchText) {
+                confirmPasswordInput.addEventListener('input', function() {
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = this.value;
+                    
+                    if (confirmPassword === '') {
+                        passwordMatchText.textContent = '';
+                    } else if (password === confirmPassword) {
+                        passwordMatchText.textContent = 'Passwords match';
+                        passwordMatchText.className = 'text-success';
+                    } else {
+                        passwordMatchText.textContent = 'Passwords do not match';
+                        passwordMatchText.className = 'text-error';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

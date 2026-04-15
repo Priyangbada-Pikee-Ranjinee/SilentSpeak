@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/tailwind.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
 </head>
 <body class="font-sans overflow-x-hidden">
     <!-- Navigation -->
@@ -54,20 +55,20 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section pt-20 pb-10 mt-16">
-        <div class="w-full px-4 mt-20">
+    <section id="home" class="hero-section pt-20 pb-10 mt-5">
+        <div class="w-full px-4 mt-6">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-800">Breaking Communication Barriers for Students with Disabilities</h1>
-                    <p class="text-lg md:text-xl mb-8 text-gray-600 leading-relaxed">Silent Speak is an innovative web application designed to help students with hearing, speech, color blindness, and dyslexia communicate effectively in classroom settings.</p>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gray-800">Breaking <span class="text-cyan-500">Communication Barriers</span> for Students with <span class="text-blue-500">Disabilities</span> </h1>
+                    <p class="text-lg md:text-xl mb-8 text-gray-600 leading-relaxed hover:text-amber-500">Silent Speak is an innovative web application designed to help students with hearing, speech, color blindness, and dyslexia communicate effectively in classroom settings.</p>
                     <div class="flex flex-wrap gap-4">
                         <a href="pages/register.html" class="btn btn-primary btn-lg">
                             <i class="fas fa-user-plus mr-2"></i> Create Account
                         </a>
-                        <a href="app.html" class="btn btn-outline btn-primary btn-lg">
+                        <!-- <a href="app.html" class="btn btn-outline btn-primary btn-lg">
                             <i class="fas fa-rocket mr-2"></i> Launch App
-                        </a>
-                        <a href="#features" class="btn btn-secondary btn-lg">
+                        </a> -->
+                        <a href="#about" class="btn btn-secondary btn-lg">
                             <i class="fas fa-info-circle mr-2"></i> Learn More
                         </a>
                     </div>
@@ -82,69 +83,166 @@
 
     <!-- Features Section -->
     <section id="features" class="py-16 bg-base-200">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Key Features</h2>
+        <div  class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 hover:text-amber-600 ">Key Features</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                <div onclick="modal1.showModal()" class="card bg-base-100 shadow-xl card-hover h-full">
                     <div class="card-body text-center p-8">
                         <div class="feature-icon">
                             <i class="fas fa-microphone-alt fa-3x text-primary"></i>
                         </div>
-                        <h3 class="card-title text-xl font-bold justify-center mb-4">Live Captioning</h3>
-                        <p class="text-gray-600">Real-time speech-to-text conversion for classroom lectures in multiple languages including Bangla, English, and Banglish.</p>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Live Captioning</h3>
+                        <p class="text-gray-600 hover:text-amber-500">Real-time speech-to-text conversion for classroom lectures in multiple languages including Bangla, English, and Banglish.</p>
                     </div>
                 </div>
+                <!-- Modal 1 -->
+                <!-- Open the modal using ID.showModal() method -->
+                <dialog id="modal1" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div class="card-body text-center p-8">
+                            <div class="feature-icon">
+                                <i class="fas fa-microphone-alt fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Live Captioning</h3>
+                            <p class="text-gray-600 hover:text-amber-500">Real-time speech-to-text conversion for classroom lectures in multiple languages including Bangla, English, and Banglish.</p>
+                        </div>
+                    </div>
+                </dialog>
                 <!-- Feature 2 -->
-                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                <div onclick="modal2.showModal()" class="card bg-base-100 shadow-xl card-hover h-full">
                     <div class="card-body text-center p-8">
                         <div class="feature-icon">
                             <i class="fas fa-chalkboard-teacher fa-3x text-primary"></i>
                         </div>
-                        <h3 class="card-title text-xl font-bold justify-center mb-4">Teacher-Student Sessions</h3>
-                        <p class="text-gray-600">Create virtual classrooms where teachers can share live captions and students can join with session codes.</p>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Teacher-Student Sessions</h3>
+                        <p class="text-gray-600 hover:text-amber-500">Create virtual classrooms where teachers can share live captions and students can join with session codes.</p>
                     </div>
                 </div>
+                <!-- Modal 2 -->
+                <!-- Open the modal using ID.showModal() method -->
+                <dialog id="modal2" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div class="card-body text-center p-8">
+                            <div class="feature-icon">
+                                <i class="fas fa-chalkboard-teacher fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Teacher-Student Sessions</h3>
+                            <p class="text-gray-600 hover:text-amber-500">Create virtual classrooms where teachers can share live captions and students can join with session codes.</p>
+                        </div>
+                    </div>
+                </dialog>
                 <!-- Feature 3 -->
-                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                <div onclick="modal3.showModal()" class="card bg-base-100 shadow-xl card-hover h-full">
                     <div class="card-body text-center p-8">
                         <div class="feature-icon">
                             <i class="fas fa-sticky-note fa-3x text-primary"></i>
                         </div>
-                        <h3 class="card-title text-xl font-bold justify-center mb-4">Smart Notes</h3>
-                        <p class="text-gray-600">Save captions as notes with AI-powered formatting and organization for better study materials.</p>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Smart Notes</h3>
+                        <p class="text-gray-600 hover:text-amber-500">Save captions as notes with AI-powered formatting and organization for better study materials.</p>
                     </div>
                 </div>
+                <!-- Modal 3 -->
+                <!-- Open the modal using ID.showModal() method -->
+                <dialog id="modal3" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div class="card-body text-center p-8">
+                            <div class="feature-icon">
+                                <i class="fas fa-sticky-note fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Smart Notes</h3>
+                            <p class="text-gray-600 hover:text-amber-500">Save captions as notes with AI-powered formatting and organization for better study materials.</p>
+                        </div>
+                    </div>
+                </dialog>
                 <!-- Feature 4 -->
-                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                <div onclick="modal4.showModal()" class="card bg-base-100 shadow-xl card-hover h-full">
                     <div class="card-body text-center p-8">
                         <div class="feature-icon">
                             <i class="fas fa-clock fa-3x text-primary"></i>
                         </div>
-                        <h3 class="card-title text-xl font-bold justify-center mb-4">Pomodoro Timer</h3>
-                        <p class="text-gray-600">Focus timer with task management integrated with teacher-assigned homework and classwork.</p>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Pomodoro Timer</h3>
+                        <p class="text-gray-600 hover:text-amber-500">Focus timer with task management integrated with teacher-assigned homework and classwork.</p>
                     </div>
                 </div>
+                <!-- Modal 4 -->
+                <!-- Open the modal using ID.showModal() method -->
+                <dialog id="modal4" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div class="card-body text-center p-8">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Pomodoro Timer</h3>
+                            <p class="text-gray-600 hover:text-amber-500">Focus timer with task management integrated with teacher-assigned homework and classwork.</p>
+                        </div>
+                    </div>
+                </dialog>
                 <!-- Feature 5 -->
-                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                <div onclick="modal5.showModal()" class="card bg-base-100 shadow-xl card-hover h-full">
                     <div class="card-body text-center p-8">
                         <div class="feature-icon">
                             <i class="fas fa-comments fa-3x text-primary"></i>
                         </div>
-                        <h3 class="card-title text-xl font-bold justify-center mb-4">Quick Communication</h3>
-                        <p class="text-gray-600">Pre-set buttons for common phrases and emergency communication with text-to-speech output.</p>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Quick Communication</h3>
+                        <p class="text-gray-600 hover:text-amber-500">Pre-set buttons for common phrases and emergency communication with text-to-speech output.</p>
                     </div>
                 </div>
+                <!-- Modal 5 -->
+                <!-- Open the modal using ID.showModal() method -->
+                <dialog id="modal5" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div class="card-body text-center p-8">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Quick Communication</h3>
+                            <p class="text-gray-600 hover:text-amber-500">Pre-set buttons for common phrases and emergency communication with text-to-speech output.</p>
+                        </div>
+                    </div>
+                </dialog>
                 <!-- Feature 6 -->
-                <div class="card bg-base-100 shadow-xl card-hover h-full">
+                <div onclick="modal6.showModal()" class="card bg-base-100 shadow-xl card-hover h-full">
                     <div class="card-body text-center p-8">
                         <div class="feature-icon">
                             <i class="fas fa-universal-access fa-3x text-primary"></i>
                         </div>
-                        <h3 class="card-title text-xl font-bold justify-center mb-4">Accessibility First</h3>
-                        <p class="text-gray-600">Color-blind friendly themes, adjustable font sizes, and customizable interface for diverse needs.</p>
+                        <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Accessibility First</h3>
+                        <p class="text-gray-600 hover:text-amber-500">Color-blind friendly themes, adjustable font sizes, and customizable interface for diverse needs.</p>
                     </div>
                 </div>
+                 <!-- Modal 6 -->
+                <!-- Open the modal using ID.showModal() method -->
+                <dialog id="modal6" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <div class="card-body text-center p-8">
+                            <div class="feature-icon">
+                                <i class="fas fa-universal-access fa-3x text-primary"></i>
+                            </div>
+                            <h3 class="card-title text-xl font-bold justify-center mb-4 text-blue-400 ">Accessibility First</h3>
+                            <p class="text-gray-600 hover:text-amber-500">Color-blind friendly themes, adjustable font sizes, and customizable interface for diverse needs.</p>
+                        </div>
+                    </div>
+                </dialog>
+
             </div>
         </div>
     </section>
@@ -153,10 +251,10 @@
     <section id="about" class="py-16">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-8">About Silent Speak</h2>
-                <p class="text-xl mb-6 text-gray-700 leading-relaxed">Silent Speak is an academic Design Project-2 initiative aimed at creating an inclusive communication platform for students with hearing, speech, color blindness, and dyslexia disabilities.</p>
-                <p class="text-lg mb-6 text-gray-600">Our mission is to bridge the communication gap between teachers and students in classroom environments, ensuring every student has equal access to education regardless of their disabilities.</p>
-                <p class="text-lg text-gray-600">The platform uses cutting-edge web technologies including real-time speech recognition, AI-powered note formatting, and responsive design to work seamlessly on mobile devices.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 ">About Silent Speak</h2>
+                <p class="text-xl mb-6 text-gray-700 leading-relaxed hover:text-amber-500">Silent Speak is a platform focused on creating an inclusive communication experience for students facing various challenges such as hearing, speech, color vision, and reading difficulties.</p>
+                <p class="text-lg mb-6 text-gray-600 hover:text-amber-500">Our goal is to reduce communication gaps between teachers and students, making classroom interaction more accessible and effective for everyone.</p>
+                <p class="text-lg text-gray-600 hover:text-amber-500">The platform is built using modern web technologies to ensure smooth performance across devices, especially mobile, so students can use it anytime, anywhere.</p>
             </div>
         </div>
     </section>
@@ -170,9 +268,9 @@
                 <a href="pages/register.html" class="btn btn-light btn-lg">
                     <i class="fas fa-user-plus mr-2"></i> Sign Up Free
                 </a>
-                <a href="app.html" class="btn btn-outline btn-light btn-lg">
+                <!-- <a href="app.html" class="btn btn-outline btn-light btn-lg">
                     <i class="fas fa-rocket mr-2"></i> Try Demo
-                </a>
+                </a> -->
             </div>
         </div>
     </section>
@@ -198,7 +296,7 @@
                         <li><a href="#features" class="link link-hover">Features</a></li>
                         <li><a href="#about" class="link link-hover">About</a></li>
                         <li><a href="#contact" class="link link-hover">Contact</a></li>
-                        <li><a href="app.html" class="link link-hover">Launch App</a></li>
+                        <!-- <li><a href="app.html" class="link link-hover">Launch App</a></li> -->
                     </ul>
                 </div>
                 <div>
@@ -210,7 +308,7 @@
             </div>
             <div class="divider my-8"></div>
             <div class="text-center">
-                <p>&copy; 2023 Silent Speak. All rights reserved. | Academic Design Project-2</p>
+                <p>&copy; 2023 Silent Speak. All rights reserved.</p>
             </div>
         </div>
     </footer>

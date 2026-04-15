@@ -365,3 +365,30 @@ function updateUIForAuthenticatedUser(user) {
 window.AuthSystem = AuthSystem;
 window.auth = auth;
 
+
+// Helper functions for forms
+function handleLoginForm(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = form.querySelector('#email').value;
+        const password = form.querySelector('#password').value;
+        const rememberMe = form.querySelector('#rememberMe')?.checked || false;
+        
+        const result = auth.login(email, password);
+        
+        if (result.success) {
+            window.SilentSpeak.showToast(result.message, 'success');
+            
+            // Redirect after delay
+            setTimeout(() => {
+                window.location.href = '../app.html';
+            }, 1000);
+        } else {
+            window.SilentSpeak.showToast(result.message, 'danger');
+        }
+    });
+}

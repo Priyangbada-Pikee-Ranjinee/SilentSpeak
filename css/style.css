@@ -1,0 +1,28 @@
+/* Silent Speak - Main Stylesheet */
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --purple-color: #6f42c1;
+    
+    /* Accessibility Colors */
+    --colorblind-blue: #0072B2;
+    --colorblind-orange: #E69F00;
+    --colorblind-green: #009E73;
+    --colorblind-red: #D55E00;
+    --colorblind-yellow: #F0E442;
+    --colorblind-purple: #CC79A7;
+    
+    /* Font Sizes */
+    --font-small: 0.875rem;
+    --font-normal: 1rem;
+    --font-large: 1.25rem;
+    --font-xlarge: 1.5rem;
+    --font-xxlarge: 2rem;
+}

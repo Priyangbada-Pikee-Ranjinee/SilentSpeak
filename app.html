@@ -282,6 +282,57 @@ Get Started
             </div>
         </div>
     </div>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-comments"></i> Silent Speak</h5>
+                    <p>Communication aid for students with disabilities.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p>Academic Design Project-2 | <a href="index.html" class="text-white">Back to Landing Page</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Add custom purple button styling
+        document.addEventListener('DOMContentLoaded', function() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .btn-purple {
+                    background-color: #6f42c1;
+                    border-color: #6f42c1;
+                    color: white;
+                }
+                .btn-purple:hover {
+                    background-color: #5a32a3;
+                    border-color: #5a32a3;
+                    color: white;
+                }
+                .bg-purple {
+                    background-color: #6f42c1 !important;
+                }
+                .feature-card {
+                    cursor: pointer;
+                    transition: transform 0.3s;
+                }
+                .feature-card:hover {
+                    transform: translateY(-5px);
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+
 
 
 </body>

@@ -287,3 +287,267 @@
                             </div>
                         </div>
                         
+                        <!-- Communication & Tasks -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-warning">
+                                        <h5 class="mb-0"><i class="fas fa-comments"></i> Communication</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Send Message</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="teacherMessage" placeholder="Type your message...">
+                                                <select class="form-select" style="max-width: 150px;" id="messageRecipient">
+                                                    <option value="all">All Students</option>
+                                                    <option value="ahmed">Ahmed</option>
+                                                    <option value="fatima">Fatima</option>
+                                                    <option value="rahim">Rahim</option>
+                                                </select>
+                                                <button class="btn btn-warning" onclick="sendTeacherMessage()">
+                                                    <i class="fas fa-paper-plane"></i> Send
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="message-box" style="height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+                                            <div class="message received">
+                                                <strong>Ahmed:</strong> I have a question about the quadratic formula
+                                            </div>
+                                            <div class="message sent">
+                                                <strong>You:</strong> Please ask your question
+                                            </div>
+                                            <div class="message received">
+                                                <strong>Fatima:</strong> Can you repeat the formula?
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-purple text-white">
+                                        <h5 class="mb-0"><i class="fas fa-tasks"></i> Tasks & Assignments</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Create Task</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="taskTitle" placeholder="Task title">
+                                                <select class="form-select" id="taskType">
+                                                    <option>Classwork (CW)</option>
+                                                    <option>Homework (HW)</option>
+                                                    <option>Project</option>
+                                                    <option>Quiz</option>
+                                                </select>
+                                                <button class="btn btn-purple" onclick="createTask()">
+                                                    <i class="fas fa-plus"></i> Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="task-list">
+                                            <div class="task-item">
+                                                <strong>Solve quadratic equations (CW)</strong>
+                                                <small class="text-muted">Due: Today</small>
+                                                <span class="badge bg-warning float-end">Active</span>
+                                            </div>
+                                            <div class="task-item">
+                                                <strong>Chapter 5 exercises (HW)</strong>
+                                                <small class="text-muted">Due: Tomorrow</small>
+                                                <span class="badge bg-info float-end">Assigned</span>
+                                            </div>
+                                            <div class="task-item">
+                                                <strong>Algebra project</strong>
+                                                <small class="text-muted">Due: Next week</small>
+                                                <span class="badge bg-secondary float-end">Pending</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button class="btn btn-outline-purple btn-sm" onclick="downloadCaptions()">
+                                                <i class="fas fa-download"></i> Download Captions
+                                            </button>
+                                            <button class="btn btn-outline-info btn-sm" onclick="enhanceNotes()">
+                                                <i class="fas fa-magic"></i> Enhance with AI
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-info-circle"></i> Quick Actions</h5>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-success" onclick="quickAction('attendance')">
+                                <i class="fas fa-clipboard-check"></i> Take Attendance
+                            </button>
+                            <button class="btn btn-outline-primary" onclick="quickAction('poll')">
+                                <i class="fas fa-poll"></i> Create Quick Poll
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="quickAction('break')">
+                                <i class="fas fa-coffee"></i> 5-Minute Break
+                            </button>
+                            <button class="btn btn-outline-info" onclick="quickAction('recap')">
+                                <i class="fas fa-redo"></i> Session Recap
+                            </button>
+                        </div>
+                        <hr>
+                        <h6>Session Statistics</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-users text-primary"></i> Students: <strong>4/10</strong></li>
+                            <li><i class="fas fa-clock text-success"></i> Duration: <strong>25 min</strong></li>
+                            <li><i class="fas fa-comment text-info"></i> Messages: <strong>12</strong></li>
+                            <li><i class="fas fa-captions text-warning"></i> Captions: <strong>48 lines</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-history"></i> Recent Activity</h5>
+                        <div class="activity-timeline">
+                            <div class="activity-item">
+                                <small>2 min ago</small>
+                                <p>Ahmed joined the session</p>
+                            </div>
+                            <div class="activity-item">
+                                <small>5 min ago</small>
+                                <p>You sent a message to all students</p>
+                            </div>
+                            <div class="activity-item">
+                                <small>10 min ago</small>
+                                <p>Session started</p>
+                            </div>
+                            <div class="activity-item">
+                                <small>15 min ago</small>
+                                <p>Classwork task created</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Student Panel (Hidden by default) -->
+    <div class="container-fluid mt-4 d-none" id="studentPanel">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-user-graduate"></i> Student Session</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Join Session -->
+                        <div class="row mb-4" id="joinSessionSection">
+                            <div class="col-12">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Join a Session</h5>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Your Name</label>
+                                                    <input type="text" class="form-control" id="studentName" value="Ahmed Rahman" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Session Code</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="joinCode" placeholder="Enter session code">
+                                                        <button class="btn btn-primary" onclick="joinSession()">
+                                                            <i class="fas fa-sign-in-alt"></i> Join
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle"></i> Ask your teacher for the session code to join the classroom.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Active Session (Hidden by default) -->
+                        <div class="row mb-4 d-none" id="activeSessionSection">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-success text-white">
+                                        <h5 class="mb-0"><i class="fas fa-broadcast-tower"></i> Active Session: Math 101 - Algebra</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="caption-box" id="studentCaptionBox">
+                                                    <div class="caption-line">[10:30] Welcome to today's Math class on Algebra</div>
+                                                    <div class="caption-line">[10:31] Today we'll be learning about quadratic equations</div>
+                                                    <div class="caption-line">[10:32] The general form is ax² + bx + c = 0</div>
+                                                    <div class="caption-line">[10:33] Can anyone tell me what 'a' represents?</div>
+                                                    <div class="caption-line">[10:34] Teacher: 'a' is the coefficient of x²</div>
+                                                </div>
+                                                <div class="mt-2">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" id="studentAutoScroll" checked>
+                                                        <label class="form-check-label" for="studentAutoScroll">Auto Scroll</label>
+                                                    </div>
+                                                    <button class="btn btn-sm btn-outline-success float-end" onclick="saveSessionNotes()">
+                                                        <i class="fas fa-save"></i> Save Notes
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-info float-end me-2" onclick="enhanceStudentNotes()">
+                                                        <i class="fas fa-magic"></i> AI Enhance
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h6>Quick Communication</h6>
+                                                        <div class="d-grid gap-2 mb-3">
+                                                            <button class="btn btn-outline-primary quick-msg-btn" data-msg="I have a question">
+                                                                <i class="fas fa-question-circle"></i> I have a question
+                                                            </button>
+                                                            <button class="btn btn-outline-success quick-msg-btn" data-msg="I understand">
+                                                                <i class="fas fa-check-circle"></i> I understand
+                                                            </button>
+                                                            <button class="btn btn-outline-warning quick-msg-btn" data-msg="Please repeat">
+                                                                <i class="fas fa-redo"></i> Please repeat
+                                                            </button>
+                                                            <button class="btn btn-outline-danger quick-msg-btn" data-msg="I need help">
+                                                                <i class="fas fa-life-ring"></i> I need help
+                                                            </button>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Send Message to Teacher</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" id="studentMessage" placeholder="Type your message...">
+                                                                <button class="btn btn-primary" onclick="sendStudentMessage()">
+                                                                    <i class="fas fa-paper-plane"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="message-box" style="height: 150px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+                                                            <div class="message sent">
+                                                                <strong>You:</strong> I have a question about the formula
+                                                            </div>
+                                                            <div class="message received">
+                                                                <strong>Teacher:</strong> Please ask your question
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        

@@ -31,17 +31,8 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    color: #ffffff;
-    text-align: center;
-    margin: 0;
+    color: #333;
     background-color: #f5f7fa;
-     background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
-        url("../images/background\ images.jpg");
-         background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 100vh;
     padding-top: 76px; /* For fixed navbar */
 }
 
@@ -148,4 +139,183 @@ h1, h2, h3, h4, h5, h6 {
 
 .card:hover {
     transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+footer a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
+/* Accessibility Classes */
+.colorblind-friendly {
+    --primary-color: var(--colorblind-blue);
+    --secondary-color: var(--colorblind-orange);
+    --success-color: var(--colorblind-green);
+    --danger-color: var(--colorblind-red);
+    --warning-color: var(--colorblind-yellow);
+    --info-color: var(--colorblind-purple);
+}
+
+.high-contrast {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.high-contrast .card {
+    background-color: #222 !important;
+    color: #fff !important;
+}
+
+.high-contrast .navbar {
+    background-color: #111 !important;
+}
+
+/* Font Size Classes */
+.font-small {
+    font-size: var(--font-small) !important;
+}
+
+.font-normal {
+    font-size: var(--font-normal) !important;
+}
+
+.font-large {
+    font-size: var(--font-large) !important;
+}
+
+.font-xlarge {
+    font-size: var(--font-xlarge) !important;
+}
+
+.font-xxlarge {
+    font-size: var(--font-xxlarge) !important;
+}
+
+/* Live Session Styles */
+.caption-box {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+}
+
+.caption-line {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.caption-line:last-child {
+    border-bottom: none;
+}
+
+/* Speech Interface */
+.speech-interface {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.voice-preview {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+/* Quick Communication */
+.quick-button {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.quick-button:hover {
+    transform: scale(1.05);
+}
+
+/* Pomodoro Timer */
+.pomodoro-timer {
+    font-size: 5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--danger-color);
+}
+
+.task-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Notes Gallery */
+.note-card {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.note-card .card-body {
+    overflow: hidden;
+}
+
+.note-card .card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Utility Classes */
+.rounded-lg {
+    border-radius: 15px;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }

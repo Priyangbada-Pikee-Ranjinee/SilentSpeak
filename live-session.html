@@ -551,3 +551,110 @@
                             </div>
                         </div>
                         
+                        <!-- Tasks & Notes -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-warning">
+                                        <h5 class="mb-0"><i class="fas fa-tasks"></i> Assigned Tasks</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="task-list">
+                                            <div class="task-item">
+                                                <strong>Solve quadratic equations (CW)</strong>
+                                                <small class="text-muted">Due: Today</small>
+                                                <button class="btn btn-sm btn-outline-success float-end" onclick="startPomodoro(this)">
+                                                    <i class="fas fa-play"></i> Start
+                                                </button>
+                                            </div>
+                                            <div class="task-item">
+                                                <strong>Chapter 5 exercises (HW)</strong>
+                                                <small class="text-muted">Due: Tomorrow</small>
+                                                <button class="btn btn-sm btn-outline-secondary float-end" disabled>
+                                                    <i class="fas fa-clock"></i> Later
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <a href="pomodoro.html" class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-external-link-alt"></i> Open Pomodoro Timer
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h5 class="mb-0"><i class="fas fa-sticky-note"></i> Session Notes</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <textarea class="form-control" id="studentNotes" rows="4" placeholder="Take notes here...">Quadratic formula: x = [-b ± √(b² - 4ac)] / 2a</textarea>
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-info" onclick="saveStudentNotes()">
+                                                <i class="fas fa-save"></i> Save Notes
+                                            </button>
+                                            <button class="btn btn-outline-info" onclick="downloadStudentCaptions()">
+                                                <i class="fas fa-download"></i> Download Captions
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Student Sidebar -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-user-circle"></i> Student Info</h5>
+                        <p><strong>Name:</strong> Ahmed Rahman</p>
+                        <p><strong>Session:</strong> Math 101 - Algebra</p>
+                        <p><strong>Teacher:</strong> Sarah Johnson</p>
+                        <p><strong>Joined:</strong> 10:30 AM</p>
+                        <hr>
+                        <h6>Quick Actions</h6>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary" onclick="studentAction('raiseHand')">
+                                <i class="fas fa-hand-paper"></i> Raise Hand
+                            </button>
+                            <button class="btn btn-outline-success" onclick="studentAction('requestBreak')">
+                                <i class="fas fa-coffee"></i> Request Break
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="studentAction('emergency')">
+                                <i class="fas fa-exclamation-triangle"></i> Emergency
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-users"></i> Classmates</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-user text-success"></i> Fatima Begum (Online)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-user text-success"></i> Rahim Khan (Online)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-user text-secondary"></i> Sara Ahmed (Offline)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-user text-success"></i> Jamal Hossain (Online)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+

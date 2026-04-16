@@ -126,3 +126,346 @@
         padding-right: 3rem;
     }
 }
+
+/* Mobile Navigation */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: var(--primary-color);
+        padding: 1rem;
+        border-radius: 0 0 10px 10px;
+        margin-top: 10px;
+    }
+    
+    .navbar-nav .nav-item {
+        margin-bottom: 0.5rem;
+    }
+    
+    .navbar-nav .btn {
+        margin-top: 0.5rem;
+        display: block;
+        width: 100%;
+    }
+    
+    .d-flex .dropdown {
+        width: 100%;
+    }
+    
+    .d-flex .dropdown .btn {
+        width: 100%;
+    }
+}
+
+/* Tablet Landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .hero-section .row {
+        flex-direction: row;
+    }
+    
+    .feature-card {
+        height: 100%;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    footer,
+    .btn,
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0;
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    .card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+    
+    a {
+        color: black !important;
+        text-decoration: underline !important;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    body {
+        background-color: black !important;
+        color: white !important;
+    }
+    
+    .card {
+        background-color: #222 !important;
+        color: white !important;
+        border: 2px solid white !important;
+    }
+    
+    .navbar {
+        background-color: #111 !important;
+        border-bottom: 2px solid white;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .feature-card:hover,
+    .btn:hover,
+    .quick-button:hover {
+        transform: none !important;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .quick-button,
+    .feature-card {
+        min-height: 44px; /* Minimum touch target size */
+    }
+    
+    .btn-lg {
+        min-height: 50px;
+    }
+    
+    .nav-link {
+        padding: 10px 15px;
+    }
+    
+    /* Increase tap targets for mobile */
+    .form-control,
+    .form-select {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        padding: 12px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
+    
+    .card {
+        background-color: #1e1e1e;
+        color: #e0e0e0;
+    }
+    
+    .navbar-dark {
+        background-color: #1a1a1a !important;
+    }
+    
+    .bg-light {
+        background-color: #2d2d2d !important;
+    }
+    
+    .text-dark {
+        color: #e0e0e0 !important;
+    }
+    
+    .caption-box {
+        background-color: #2d2d2d;
+        border-color: #444;
+        color: #e0e0e0;
+    }
+}
+
+/* Orientation Specific */
+@media (orientation: portrait) {
+    .hero-section .row {
+        flex-direction: column;
+    }
+    
+    .hero-section img {
+        margin-top: 2rem;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .hero-section {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    .caption-box {
+        height: 150px;
+    }
+}
+
+/* Very small height devices */
+@media (max-height: 600px) {
+    .navbar {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    body {
+        padding-top: 60px;
+    }
+    
+    .hero-section {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+}
+
+/* Additional Mobile Optimizations */
+@media (max-width: 575.98px) {
+    /* Improve button spacing on mobile */
+    .btn-group .btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    /* Better spacing for form controls */
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    /* Improve transcript box for mobile */
+    .transcript-box {
+        min-height: 150px;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    /* Stack buttons vertically on very small screens */
+    .d-flex.justify-content-between .btn {
+        margin-bottom: 5px;
+        width: 100%;
+    }
+    
+    /* Improve card padding on mobile */
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Better spacing for feature cards */
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Improve table readability on mobile */
+    .table td, .table th {
+        padding: 0.5rem;
+    }
+    
+    /* Adjust badge sizes for mobile */
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.25em 0.6em;
+    }
+    
+    /* Improve modal dialogs on mobile */
+    .modal-dialog {
+        margin: 10px;
+    }
+    
+    /* Better touch targets for interactive elements */
+    .nav-link, .dropdown-item {
+        padding: 12px 16px;
+    }
+    
+    /* Pomodoro timer specific optimizations */
+    .timer-display .display-1 {
+        font-size: 3.5rem;
+    }
+    
+    .btn-group.btn-group-lg {
+        flex-wrap: wrap;
+    }
+    
+    .btn-group.btn-group-lg .btn {
+        flex: 1 0 45%;
+        margin: 2px;
+        min-width: 45%;
+    }
+    
+    /* Timer settings form optimization */
+    .timer-settings .col-md-3 {
+        margin-bottom: 1rem;
+    }
+    
+    /* Improve timer controls for mobile */
+    .timer-controls {
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Quick communication button optimizations */
+    .quick-button {
+        min-height: 60px;
+        font-size: 0.9rem;
+        padding: 10px 5px;
+        word-break: break-word;
+    }
+    
+    .row.g-3 .col-6,
+    .row.g-3 .col-4,
+    .row.g-3 .col-3 {
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Improve input group for mobile */
+    .input-group {
+        flex-wrap: wrap;
+    }
+    
+    .input-group .form-control,
+    .input-group .form-select,
+    .input-group .btn {
+        flex: 1 0 100%;
+        margin-bottom: 5px;
+    }
+    
+    .input-group .form-select {
+        max-width: 100% !important;
+    }
+}
+
+/* Medium mobile devices (landscape) */
+@media (max-width: 767.98px) and (orientation: landscape) {
+    .caption-box {
+        height: 120px;
+    }
+    
+    .hero-section {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+/* Prevent horizontal overflow on all devices */
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+/* Improve image responsiveness */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Better touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+    .btn:active,
+    .feature-card:active,
+    .quick-button:active {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+}

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer & Task Management - Silent Speak</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DaisyUI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../app.html">
+                <i class="fas fa-comments"></i> Silent Speak
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../app.html"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="live-session.html"><i class="fas fa-broadcast-tower"></i> Live Session</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="text-to-speech.html"><i class="fas fa-text-height"></i> Text to Speech</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="speech-to-text.html"><i class="fas fa-microphone"></i> Speech to Text</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="pomodoro.html"><i class="fas fa-clock"></i> Pomodoro</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="../app.html" class="btn btn-outline-light me-2">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> Profile
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-warning text-dark">
+                        <h4 class="mb-0"><i class="fas fa-clock"></i> Pomodoro Timer & Task Management</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Timer Section -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-danger text-white">
+                                        <h6 class="mb-0"><i class="fas fa-hourglass-half"></i> Pomodoro Timer</h6>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <div class="timer-display mb-4">
+                                            <h1 class="display-1 text-primary" id="timerDisplay">25:00</h1>
+                                            <p class="text-muted" id="timerStatus">Focus Session - Ready to start</p>
+                                        </div>
+                                        <div class="timer-controls mb-4">
+                                            <div class="btn-group btn-group-lg" role="group">
+                                                <button class="btn btn-success" id="startBtn" onclick="startTimer()">
+                                                    <i class="fas fa-play"></i> Start
+                                                </button>
+                                                <button class="btn btn-warning" id="pauseBtn" onclick="pauseTimer()" disabled>
+                                                    <i class="fas fa-pause"></i> Pause
+                                                </button>
+                                                <button class="btn btn-danger" id="stopBtn" onclick="stopTimer()" disabled>
+                                                    <i class="fas fa-stop"></i> Stop
+                                                </button>
+                                                <button class="btn btn-info" id="resetBtn" onclick="resetTimer()">
+                                                    <i class="fas fa-redo"></i> Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="timer-settings">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Focus Time (min)</label>
+                                                        <input type="number" class="form-control" id="focusTime" min="1" max="60" value="25">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Short Break (min)</label>
+                                                        <input type="number" class="form-control" id="shortBreak" min="1" max="30" value="5">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Long Break (min)</label>
+                                                        <input type="number" class="form-control" id="longBreak" min="5" max="60" value="15">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label class="form-label">Sessions Before Long Break</label>
+                                                        <input type="number" class="form-control" id="sessionsBeforeLongBreak" min="1" max="10" value="4">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Task Management -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header bg-success text-white">
+                                        <h6 class="mb-0"><i class="fas fa-tasks"></i> Task List</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="newTaskInput" placeholder="Add new task...">
+                                                <button class="btn btn-primary" onclick="addTask()">
+                                                    <i class="fas fa-plus"></i> Add
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="task-list" id="taskList">
+                                            <div class="task-item d-flex align-items-center mb-2">
+                                                <input type="checkbox" class="form-check-input me-2" id="task1">
+                                                <label class="form-check-label flex-grow-1" for="task1">Complete math assignment</label>
+                                                <span class="badge bg-info">High</span>
+                                            </div>
+                                            <div class="task-item d-flex align-items-center mb-2">
+                                                <input type="checkbox" class="form-check-input me-2" id="task2">
+                                                <label class="form-check-label flex-grow-1" for="task2">Read chapter 5 of history book</label>
+                                                <span class="badge bg-warning">Medium</span>
+                                            </div>
+                                            <div class="task-item d-flex align-items-center mb-2">
+                                                <input type="checkbox" class="form-check-input me-2" id="task3">
+                                                <label class="form-check-label flex-grow-1" for="task3">Prepare for English presentation</label>
+                                                <span class="badge bg-danger">Urgent</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button class="btn btn-outline-secondary btn-sm" onclick="clearCompletedTasks()">
+                                                <i class="fas fa-trash"></i> Clear Completed
+                                            </button>
+                                            <button class="btn btn-outline-primary btn-sm ms-2" onclick="exportTasks()">
+                                                <i class="fas fa-file-export"></i> Export
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0"><i class="fas fa-chart-line"></i> Productivity Stats</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="stats-grid mb-4">
+                                            <div class="stat-item text-center p-3">
+                                                <h3 class="text-primary" id="completedSessions">0</h3>
+                                                <small>Completed Sessions</small>
+                                            </div>
+                                            <div class="stat-item text-center p-3">
+                                                <h3 class="text-success" id="completedTasks">0</h3>
+                                                <small>Completed Tasks</small>
+                                            </div>
+                                            <div class="stat-item text-center p-3">
+                                                <h3 class="text-warning" id="totalFocusTime">0</h3>
+                                                <small>Total Focus Time (hrs)</small>
+                                            </div>
+                                        </div>
+                                        <div class="progress-chart mb-4">
+                                            <h6>Today's Progress</h6>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-success" id="todayProgress" style="width: 25%">25%</div>
+                                            </div>
+                                            <small class="text-muted">3 of 12 tasks completed</small>
+                                        </div>
+                                        <div class="achievements">
+                                            <h6>Recent Achievements</h6>
+                                            <div class="achievement-item d-flex align-items-center mb-2">
+                                                <i class="fas fa-trophy text-warning me-2"></i>
+                                                <div>
+                                                    <small class="d-block">5-Day Streak</small>
+                                                    <small class="text-muted">Completed focus sessions for 5 consecutive days</small>
+                                                </div>
+                                            </div>
+                                            <div class="achievement-item d-flex align-items-center mb-2">
+                                                <i class="fas fa-star text-success me-2"></i>
+                                                <div>
+                                                    <small class="d-block">Task Master</small>
+                                                    <small class="text-muted">Completed 50 tasks this month</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Pomodoro Technique Info -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-lightbulb"></i> Pomodoro Technique</h5>
+                        <p class="card-text">The Pomodoro Technique is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks.</p>
+                        <ol class="ps-3">
+                            <li>Choose a task to work on</li>
+                            <li>Set the timer for 25 minutes</li>
+                            <li>Work on the task until timer rings</li>
+                            <li>Take a short break (5 minutes)</li>
+                            <li>After 4 sessions, take a longer break (15-30 minutes)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-bolt"></i> Quick Actions</h5>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary" onclick="startFocusSession()">
+                                <i class="fas fa-play-circle"></i> Start Focus Session
+                            </button>
+                            <button class="btn btn-outline-success" onclick="startShortBreak()">
+                                <i class="fas fa-coffee"></i> Start Short Break
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="startLongBreak()">
+                                <i class="fas fa-umbrella-beach"></i> Start Long Break
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="resetAllStats()">
+                                <i class="fas fa-redo"></i> Reset All Stats
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-cog"></i> Timer Settings</h5>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="autoStartBreaks" checked>
+                            <label class="form-check-label" for="autoStartBreaks">Auto-start breaks</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="autoStartSessions">
+                            <label class="form-check-label" for="autoStartSessions">Auto-start next session</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="soundNotifications" checked>
+                            <label class="form-check-label" for="soundNotifications">Sound notifications</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="desktopNotifications">
+                            <label class="form-check-label" for="desktopNotifications">Desktop notifications</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="strictMode">
+                            <label class="form-check-label" for="strictMode">Strict mode (no pausing)</label>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="form-label">Notification Sound</label>
+                            <select class="form-select" id="notificationSound">
+                                <option value="bell">Bell</option>
+                                <option value="chime">Chime</option>
+                                <option value="beep">Beep</option>
+                                <option value="ding">Ding</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-comments"></i> Silent Speak</h5>
+                    <p>Pomodoro timer and task management for productive classroom sessions.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p><a href="../app.html" class="text-white">Back to Dashboard</a> | <a href="#" class="text-white" onclick="resetAll()">Reset All</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/pomodoro.js"></script>
+    <script>
+        // Add custom styling for pomodoro timer
+        const style = document.createElement('style');
+        style.textContent = `
+            .timer-display {
+                font-family: 'Courier New', monospace;
+            }
+            .task-item {
+                padding: 10px;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                background-color: #f8f9fa;
+                transition: all 0.2s;
+            }
+            .task-item:hover {
+                background-color: #e9ecef;
+            }
+            .task-item.completed {
+                opacity: 0.6;
+                text-decoration: line-through;
+            }
+            .stats-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+            }
+            .stat-item {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                background-color: #f8f9fa;
+            }
+            .achievement-item {
+                padding: 10px;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                background-color: #f8f9fa;
+                margin-bottom: 5px;
+            }
+            .achievement-item:hover {
+                background-color: #e9ecef;
+            }
+            .progress-chart .progress {
+                height: 20px;
+                border-radius: 10px;
+            }
+            .progress-chart .progress-bar {
+                border-radius: 10px;
+                font-size: 0.8rem;
+                line-height: 20px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes & File Storage - Silent Speak</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DaisyUI CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../app.html">
+                <i class="fas fa-comments"></i> Silent Speak
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../app.html"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="live-session.html"><i class="fas fa-broadcast-tower"></i> Live Session</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="text-to-speech.html"><i class="fas fa-text-height"></i> Text to Speech</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="speech-to-text.html"><i class="fas fa-microphone"></i> Speech to Text</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="notes.html"><i class="fas fa-sticky-note"></i> Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pomodoro.html"><i class="fas fa-clock"></i> Pomodoro</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="../app.html" class="btn btn-outline-light me-2">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i> Profile
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user-edit"></i> Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-sticky-note"></i> Notes & File Storage</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- Note Editor -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <h6 class="mb-0"><i class="fas fa-edit"></i> Create New Note</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Note Title</label>
+                                            <input type="text" class="form-control" id="noteTitle" placeholder="Enter note title">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-select" id="noteCategory">
+                                                <option value="class">Class Notes</option>
+                                                <option value="assignment">Assignments</option>
+                                                <option value="meeting">Meeting Notes</option>
+                                                <option value="personal">Personal</option>
+                                                <option value="todo">To-Do List</option>
+                                                <option value="reference">Reference</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Note Content</label>
+                                            <div class="editor-toolbar mb-2">
+                                                <div class="btn-group btn-group-sm" role="group">
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('bold')"><i class="fas fa-bold"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('italic')"><i class="fas fa-italic"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('underline')"><i class="fas fa-underline"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('strikethrough')"><i class="fas fa-strikethrough"></i></button>
+                                                    <div class="btn-group btn-group-sm" role="group">
+                                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                                            <i class="fas fa-heading"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="#" onclick="formatText('h1')">Heading 1</a></li>
+                                                            <li><a class="dropdown-item" href="#" onclick="formatText('h2')">Heading 2</a></li>
+                                                            <li><a class="dropdown-item" href="#" onclick="formatText('h3')">Heading 3</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('listUl')"><i class="fas fa-list-ul"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('listOl')"><i class="fas fa-list-ol"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('link')"><i class="fas fa-link"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('image')"><i class="fas fa-image"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="formatText('code')"><i class="fas fa-code"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="note-editor" id="noteEditor" contenteditable="true">
+                                                <p>Start typing your note here...</p>
+                                                <p>You can format text using the toolbar above.</p>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Tags (comma separated)</label>
+                                            <input type="text" class="form-control" id="noteTags" placeholder="e.g., math, homework, important">
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <button class="btn btn-primary" onclick="saveNote()">
+                                                    <i class="fas fa-save"></i> Save Note
+                                                </button>
+                                                <button class="btn btn-outline-secondary ms-2" onclick="clearEditor()">
+                                                    <i class="fas fa-trash"></i> Clear
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-outline-info" onclick="enhanceWithAI()">
+                                                    <i class="fas fa-magic"></i> Enhance with AI
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-warning text-dark">
+                                        <h6 class="mb-0"><i class="fas fa-upload"></i> File Upload</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Upload Files (Max 10MB each)</label>
+                                            <input type="file" class="form-control" id="fileUpload" multiple accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.ppt,.pptx,.xls,.xlsx">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">File Description</label>
+                                            <textarea class="form-control" id="fileDescription" rows="2" placeholder="Describe the file content"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Access Level</label>
+                                            <select class="form-select" id="fileAccess">
+                                                <option value="private">Private (Only me)</option>
+                                                <option value="shared">Shared with teacher</option>
+                                                <option value="public">Public (All class members)</option>
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-warning" onclick="uploadFiles()">
+                                            <i class="fas fa-cloud-upload-alt"></i> Upload Files
+                                        </button>
+                                        <div class="progress mt-3 d-none" id="uploadProgress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Notes List -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-secondary text-white">
+                                        <h6 class="mb-0"><i class="fas fa-list"></i> My Notes</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" id="searchNotes" placeholder="Search notes...">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select class="form-select" id="filterCategory">
+                                                    <option value="">All Categories</option>
+                                                    <option value="class">Class Notes</option>
+                                                    <option value="assignment">Assignments</option>
+                                                    <option value="meeting">Meeting Notes</option>
+                                                    <option value="personal">Personal</option>
+                                                    <option value="todo">To-Do List</option>
+                                                    <option value="reference">Reference</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="notes-list" id="notesList">
+                                            <!-- Notes will be loaded here -->
+                                            <div class="text-center py-5">
+                                                <i class="fas fa-sticky-note fa-3x text-muted mb-3"></i>
+                                                <p class="text-muted">No notes yet. Create your first note above!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Storage Stats -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-database"></i> Storage Statistics</h5>
+                        <div class="storage-info mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Used Storage</span>
+                                <span id="usedStorage">0 MB</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar bg-success" id="storageProgress" style="width: 0%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small class="text-muted">Total: 100 MB</small>
+                                <small class="text-muted" id="freeStorage">100 MB free</small>
+                            </div>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-item text-center p-3">
+                                <h3 class="text-primary" id="totalNotes">0</h3>
+                                <small>Total Notes</small>
+                            </div>
+                            <div class="stat-item text-center p-3">
+                                <h3 class="text-success" id="totalFiles">0</h3>
+                                <small>Total Files</small>
+                            </div>
+                            <div class="stat-item text-center p-3">
+                                <h3 class="text-warning" id="totalSize">0 MB</h3>
+                                <small>Total Size</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Files -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-file"></i> Recent Files</h5>
+                        <div class="recent-files" id="recentFiles">
+                            <div class="file-item d-flex align-items-center mb-2">
+                                <i class="fas fa-file-pdf text-danger me-2"></i>
+                                <div class="flex-grow-1">
+                                    <small class="d-block">math_assignment.pdf</small>
+                                    <small class="text-muted">2 days ago • 2.4 MB</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            <div class="file-item d-flex align-items-center mb-2">
+                                <i class="fas fa-file-word text-primary me-2"></i>
+                                <div class="flex-grow-1">
+                                    <small class="d-block">english_essay.docx</small>
+                                    <small class="text-muted">1 week ago • 1.8 MB</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-secondary btn-sm w-100 mt-3" onclick="viewAllFiles()">
+                            <i class="fas fa-folder-open"></i> View All Files
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-bolt"></i> Quick Actions</h5>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-primary" onclick="importFromSpeech()">
+                                <i class="fas fa-microphone"></i> Import from Speech-to-Text
+                            </button>
+                            <button class="btn btn-outline-success" onclick="exportAllNotes()">
+                                <i class="fas fa-file-export"></i> Export All Notes
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="backupNotes()">
+                                <i class="fas fa-cloud-upload-alt"></i> Backup to Cloud
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="deleteOldNotes()">
+                                <i class="fas fa-trash"></i> Delete Old Notes
+                            </button>
+                        </div>
+                        <hr>
+                        <h6>AI Features</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="aiSummarize" checked>
+                            <label class="form-check-label" for="aiSummarize">Auto-summarize long notes</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="aiFormat" checked>
+                            <label class="form-check-label" for="aiFormat">Auto-format notes</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="aiSuggest">
+                            <label class="form-check-label" for="aiSuggest">Suggest related content</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-comments"></i> Silent Speak</h5>
+                    <p>Notes and file storage system for accessible classroom communication.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>&copy; 2023 Silent Speak. All rights reserved.</p>
+                    <p><a href="../app.html" class="text-white">Back to Dashboard</a> | <a href="#" class="text-white" onclick="clearAllData()">Clear All Data</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/main.js"></script>
+    <script src="../js/notes.js"></script>
+    <script>
+        // Add custom styling for notes
+        const style = document.createElement('style');
+        style.textContent = `
+            .note-editor {
+                min-height: 200px;
+                max-height: 400px;
+                overflow-y: auto;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                padding: 15px;
+                background-color: #f8f9fa;
+            }
+            .note-editor:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+            }
+            .editor-toolbar {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                padding: 5px;
+                background-color: #f8f9fa;
+            }
+            .notes-list {
+                max-height: 500px;
+                overflow-y: auto;
+            }
+            .note-item {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                padding: 15px;
+                margin-bottom: 10px;
+                background-color: #f8f9fa;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .note-item:hover {
+                background-color: #e9ecef;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .note-item.selected {
+                border-color: #007bff;
+                background-color: #e7f1ff;
+            }
+            .file-item {
+                padding: 10px;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                margin-bottom: 5px;
+                background-color: #f8f9fa;
+            }
+            .file-item:hover {
+                background-color: #e9ecef;
+            }
+            .stats-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+            }
+            .stat-item {
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                background-color: #f8f9fa;
+            }
+            .tag {
+                display: inline-block;
+                background-color: #e7f1ff;
+                color: #007bff;
+                padding: 2px 8px;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                margin-right: 5px;
+                margin-bottom: 5px;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
